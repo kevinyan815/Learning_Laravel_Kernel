@@ -233,10 +233,12 @@ object(Circle)#6 (2) {
 float(3.14)*/
 ```
 
-通过上面这个实例我简单描述了一下如何利用PHP类的反射来实现依赖注入，Laravel的依赖注入也是通过这个思路来实现的，只不过设计的更精密大量地利用了闭包回调来应对各种复杂的依赖注入，详情可以参考我的另一篇介绍[Laravel服务容器][3]的文章。
+通过上面这个实例我简单描述了一下如何利用PHP类的反射来实现依赖注入，Laravel的依赖注入也是通过这个思路来实现的，只不过设计的更精密大量地利用了闭包回调来应对各种复杂的依赖注入。
 
 本文的[示例代码的下载链接][4]
 
+
+下一篇：[Laravel服务容器][3]
 
   [1]: http://php.net/manual/zh/intro.reflection.php
   [2]: https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/IocContainer.md
