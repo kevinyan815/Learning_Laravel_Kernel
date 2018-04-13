@@ -239,6 +239,6 @@ float(3.14)*/
 
 
   [1]: http://php.net/manual/zh/intro.reflection.php
-  [2]: https://github.com/kevinyan815/Learning_Laravel_Kernel/wiki/%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8(IocContainer)
-  [3]: https://github.com/kevinyan815/Learning_Laravel_Kernel/wiki/%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8(IocContainer)
+  [2]: https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/IocContainer.md
+  [3]: https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/IocContainer.md
   [4]: https://github.com/kevinyan815/php_reflection_dependency_injection_demo/blob/master/reflection.php
