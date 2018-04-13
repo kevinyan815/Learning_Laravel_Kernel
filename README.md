@@ -16,6 +16,6 @@ Laravel核心代码学习
 
 
 
-## 阅读连接
+## 文章目录
 
-[Laravel核心代码学习](https://github.com/kevinyan815/Learning_Laravel_Kernel/wiki)
+[类的反射和依赖注入](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/reflection.md)
