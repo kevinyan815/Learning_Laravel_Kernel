@@ -231,4 +231,4 @@ router服务对应的类就是`\Illuminate\Routing\Router`, 所以Route Facade�
 
 上一篇: [服务提供器](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/ServiceProvider.md)
 
-下一篇: [路由]
+下一篇: [路由](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Route.md)
