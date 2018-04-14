@@ -20,3 +20,4 @@ Laravel核心代码学习
 
 - [类的反射和依赖注入](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/reflection.md)
 - [服务容器(IocContainer)](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/IocContainer.md)
+- [服务提供器(ServiceProvider)](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/ServiceProvider.md)
