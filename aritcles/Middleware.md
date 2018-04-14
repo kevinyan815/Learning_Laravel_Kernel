@@ -296,4 +296,4 @@ array_reduce每次调用callback返回的闭包都会作为参数$stack传递给
 
 上一篇: [路由](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Route.md)
 
-下一篇: [Database(一)]
+下一篇: [Database(一)](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Database1.md)
