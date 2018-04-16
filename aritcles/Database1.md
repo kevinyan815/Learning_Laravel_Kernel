@@ -350,3 +350,5 @@ Connection就是DatabaseManager代理的数据库连接对象了， 所以最开
 
 
 上一篇: [中间件](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Middleware.md)
+
+下一篇: [Database 查询构建器](https://github.com/kevinyan815/Learning_Laravel_Kernel/edit/master/aritcles/Database2.md)
