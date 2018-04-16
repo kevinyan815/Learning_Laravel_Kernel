@@ -25,3 +25,4 @@ Laravel核心代码学习
 - [路由](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Route.md)
 - [中间件](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Middleware.md)
 - [Database 基础介绍](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Database1.md)
+- [Database 查询构建器](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Database2.md)
