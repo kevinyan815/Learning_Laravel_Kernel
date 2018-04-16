@@ -554,4 +554,6 @@ processor是用来对SQL执行结果进行后置处理的，默认的processor�
 
 到这里QueryBuilder大体的流程就梳理完了，虽然我们只看了select一种操作但其实其他的update、insert、delete也是一样先由QueryBuilder编译完成SQL最后由Connection实例去执行然后返回结果，在编译的过程中QueryBuilder也会帮助我们进行防SQL注入。
 
+上一篇: [Database 基础介绍](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Database1.md)
+
 
