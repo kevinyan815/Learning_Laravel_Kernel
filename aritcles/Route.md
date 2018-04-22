@@ -509,6 +509,7 @@ class RouteParameterBinder
 
 
 ```
+namespace Illuminate\Routing;
 class Router implements RegistrarContract, BindingRegistrar
 {	
     public function dispatch(Request $request)
@@ -536,10 +537,45 @@ class Router implements RegistrarContract, BindingRegistrar
         );
     }
     
+    protected function runRouteWithinStack(Route $route, Request $request)
+    {
+        $shouldSkipMiddleware = $this->container->bound('middleware.disable') &&
+                            $this->container->make('middleware.disable') === true;
+	//收集路由和控制器里应用的中间件
+        $middleware = $shouldSkipMiddleware ? [] : $this->gatherRouteMiddleware($route);
+
+        return (new Pipeline($this->container))
+                    ->send($request)
+                    ->through($middleware)
+                    ->then(function ($request) use ($route) {
+                        return $this->prepareResponse(
+                            $request, $route->run()
+                        );
+                    });
+    
+    
+}
+
+namespace Illuminate\Routing;
+class Route
+{
+    public function run()
+    {
+        $this->container = $this->container ?: new Container;
+        try {
+            if ($this->isControllerAction()) {
+                return $this->runController();
+            }
+            return $this->runCallable();
+        } catch (HttpResponseException $e) {
+            return $e->getResponse();
+        }
+    }
+
 }
 ```
 
-这里我们主要介绍路由相关的内容，在runRoute的过程通过上面的源码可以看到其实也很复杂， 会收集路由和控制器里的中间件，将请求通过中间件过滤才会最终调用控制器方法来生成响应对象，这个过程还会设计到我们以前介绍过的中间件过滤、服务解析、依赖注入方面的信息，如果在看源码时有不懂的地方可以翻看我之前写的文章。
+这里我们主要介绍路由相关的内容，runRoute的过程通过上面的源码可以看到其实也很复杂， 会收集路由和控制器里的中间件，将请求通过中间件过滤才会最终到达目的地路由，执行目的路由地`run()`方法，里面会判断路由对应地是一个控制器方法还是闭包然后进行相应地调用，最后把执行结果包装成Response对象返回给客户端。 下一节我们就来学习一下这里提到的中间件。
 
 上一篇: [Facades](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Facades.md)
 
