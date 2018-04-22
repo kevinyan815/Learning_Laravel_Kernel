@@ -299,8 +299,8 @@ array_reduce每次调用callback返回的闭包都会作为参数$stack传递给
                                 $request, $route->run()
                             );
                         });
-    }
-
+    }
+     
     namespace Illuminate\Routing;
     class Route 
     {
