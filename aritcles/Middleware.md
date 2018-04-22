@@ -273,6 +273,17 @@ array_reduce每次调用callback返回的闭包都会作为参数$stack传递给
         return $this->runRoute($request, $this->findRoute($request));
     }
 
+    protected function runRoute(Request $request, Route $route)
+    {
+        $request->setRouteResolver(function () use ($route) {
+            return $route;
+        });
+        $this->events->dispatch(new Events\RouteMatched($route, $request));
+        return $this->prepareResponse($request,
+            $this->runRouteWithinStack($route, $request)
+        );
+    }
+
     protected function runRouteWithinStack(Route $route, Request $request)
     {
         $shouldSkipMiddleware = $this->container->bound('middleware.disable') &&
@@ -288,9 +299,27 @@ array_reduce每次调用callback返回的闭包都会作为参数$stack传递给
                                 $request, $route->run()
                             );
                         });
+    }
+
+    namespace Illuminate\Routing;
+    class Route 
+    {
+        public function run()
+        {
+            $this->container = $this->container ?: new Container;
+            try {
+                if ($this->isControllerAction()) {
+                    return $this->runController();
+                }
+                return $this->runCallable();
+            } catch (HttpResponseException $e) {
+                return $e->getResponse();
+            }
+        }
+
     }
 
-收集完路由和控制器里应用的中间件后，依赖时利用Pipeline对象来传送请求对象通过收集上来的这些中间件然后到达最终的目的地，在这里会执行路由对应的控制器方法生成响应对象，然后响应对象会依次来通过上面应用的所有中间件的后置操作，最终离开应用被发送给客户端。
+收集完路由和控制器里应用的中间件后，依然是利用Pipeline对象来传送请求对象通过收集上来的这些中间件然后到达最终的目的地，在这里会执行目的路由的run方法，run方法里面会判断路由对应的是一个控制器方法还是闭包然后进行相应地调用，最后把执行结果包装成Response对象。Response对象会依次通过上面应用的所有中间件的后置操作，最终离开应用被发送给客户端。
 
 限于篇幅和为了文章的可读性，收集路由和控制器中间件然后执行路由对应的处理方法的过程我就不在这里详述了，感兴趣的同学可以自己去看Router的源码，本文的目的还是主要为了梳理laravel是如何设计中间件的以及如何执行它们的，希望能对感兴趣的朋友有帮助。
 
