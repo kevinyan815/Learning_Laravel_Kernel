@@ -553,7 +553,7 @@ class Router implements RegistrarContract, BindingRegistrar
                         );
                     });
     
-    
+    }
 }
 
 namespace Illuminate\Routing;
