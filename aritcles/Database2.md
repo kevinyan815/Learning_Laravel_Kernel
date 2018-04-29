@@ -556,4 +556,6 @@ processor是用来对SQL执行结果进行后置处理的，默认的processor�
 
 上一篇: [Database 基础介绍](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Database1.md)
 
+下一篇: [Database 模型CRUD](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Database3.md)
+
 
