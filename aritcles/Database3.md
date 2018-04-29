@@ -351,7 +351,7 @@ abstract class Model implements ...
 
 ### Model写入
 
-刚才说通过Eloquent Model获取模型时(在`newFromBuilder`方法里)会把Model实例的`exists`属性设置为true，那么对于新建的Model实例执行`save`方法时就会去执行`performInsert`方法
+刚才说通过Eloquent Model获取模型时(在`newFromBuilder`方法里)会把Model实例的`exists`属性设置为true，那么对于新建的Model实例这个属性的值是false，在执行`save`方法时就会去执行`performInsert`方法
 
     protected function performInsert(Builder $query)
     {
