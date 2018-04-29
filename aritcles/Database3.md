@@ -11,6 +11,7 @@ Eloquent Builder是在上文说到的Query Builder的基础上实现的，我们
     DB::table('user')->where('name', 'James')->where('age', 27)->get();
     
 把它改写为使用Model的方式后就变成了
+
     User::where('name', 'James')->where('age', 27)->get();
     
 在Model类文件里我们并没有找到`where`、`find`、`first`这些常用的查询方法，我们都知道当调用一个不存在的类方法时PHP会触发魔术方法`__callStatic`, 调用不存在的实例方法会触发`__call`, 很容易就猜到上面这些方法就是通过这两个魔术方法来动态调用的，下面让我们看一下源码。
