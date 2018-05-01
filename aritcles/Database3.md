@@ -1,8 +1,8 @@
 # Database 模型CRUD
 
-上一篇文章我们讲了Database的查询构建器QueryBuilder, 学习了QueryBuilder为构建生成SQL语句而提供的Fluent Api的代码实现。这一篇文章我们来学习Laravel Database里另外一个重要的部分: Eloquent Model。
+上篇文章我们讲了Database的查询构建器Query Builder, 学习了Query Builder为构建生成SQL语句而提供的Fluent Api的代码实现。这篇文章我们来学习Laravel Database地另外一个重要的部分: Eloquent Model。
 
-Eloquent Model把数据表的属性、关联关系等抽象到了每个Model类中，所以Model类是对数据表的抽象，而Model对象则是对表中单条记录的抽象。Eloquent Model以上文讲到的QueryBuilder为基础提供了Eloquent Builder与数据库进行交互，此外还提供了模型关联优雅的解决了多个数据表之间的关联关系。 
+Eloquent Model把数据表的属性、关联关系等抽象到了每个Model类中，所以Model类是对数据表的抽象，而Model对象则是对表中单条记录的抽象。Eloquent Model以上文讲到的Query Builder为基础提供了Eloquent Builder与数据库进行交互，此外还提供了模型关联优雅地解决了多个数据表之间的关联关系。 
 
 ### 加载Eloquent Builder
 
@@ -66,7 +66,7 @@ abstract class Model implements ...
 
 ### Model查询
 
-通过上面的那些代码我们可以看到对Model调用的这些查询相关的方法最后都会通过`__call`转而去调用Eloquent Builder实例的这些方法，我们看到实例化的时候把数据库连接的QueryBuilder对象传给了Eloquent Builder的构造方法, 我们去看一下Eloquent Builder的源码。
+通过上面的那些代码我们可以看到对Model调用的这些查询相关的方法最后都会通过`__call`转而去调用Eloquent Builder实例的这些方法，Eloquent Builder与底层数据库交互的部分都是依赖Query Builder来实现的，我们看到在实例化Eloquent Builder的时候把数据库连接的QueryBuilder对象传给了它的构造方法, 下面就去看一下Eloquent Builder的源码。
 
 ```
 namespace Illuminate\Database\Eloquent;
@@ -133,7 +133,7 @@ class Builder
 
 public function newFromBuilder($attributes = [], $connection = null)
 {
-	//新建实例，并且把它的exists属性设成true, save时会根据这个属性判断是insert还是update
+    //新建实例，并且把它的exists属性设成true, save时会根据这个属性判断是insert还是update
     $model = $this->newInstance([], true);
 
     $model->setRawAttributes((array) $attributes, true);
@@ -146,7 +146,7 @@ public function newFromBuilder($attributes = [], $connection = null)
 }
 ```
 
-代码里Eloquent Builder的where方法在接到调用请求后直接把请求转给来QueryBuilder的where方法，然后get方法也是先通过QueryBuilder的get方法执行查询拿到结果数组后再通过`newFromBuilder`方法把结果数组转换成Model对象构成的集合，而另外一个比较常用的方法first也是在get方法的基础上实现的，对query应用limit 1，再从`get`方法返回的集合中用 `Arr::first()`取出model对象返回给调用者。
+代码里Eloquent Builder的where方法在接到调用请求后直接把请求转给来Query Builder的`where`方法，然后get方法也是先通过Query Builder的`get`方法执行查询拿到结果数组后再通过`newFromBuilder`方法把结果数组转换成Model对象构成的集合，而另外一个比较常用的方法`first`也是在`get`方法的基础上实现的，对query应用limit 1，再从`get`方法返回的集合中用 `Arr::first()`取出model对象返回给调用者。
 
 
 
@@ -181,7 +181,7 @@ abstract class Model implements ...
             return;
         }
 
-        //如果attributes数组的index里有$key或者$key对应一个属性访问器`'get' . $key` 则从这里取出$key对应的值
+        //如果attributes数组的index里有$key或者$key对应一个属性访问器`'get' . $key . 'Attribute'` 则从这里取出$key对应的值
         //否则就尝试去获取模型关联的值
         if (array_key_exists($key, $this->attributes) ||
             $this->hasGetMutator($key)) {
@@ -224,7 +224,8 @@ abstract class Model implements ...
     
     public function setAttribute($key, $value)
     {
-        if ($this->hasSetMutator($key)) {
+    	//如果$key存在属性修改器则去调用$key地属性修改器`'set' . $key . 'Attribute'` 比如`setNameAttribute`
+        if ($this->hasSetMutator($key)) {
             $method = 'set'.Str::studly($key).'Attribute';
 
             return $this->{$method}($value);
@@ -249,7 +250,7 @@ abstract class Model implements ...
 }
 ```
 
-所以当执行`$user->age = 28`时， User Model实例里$attributes属性会变成
+如果Model定义的属性修改器那么在设置属性的时候会去执行修改器，在我们的例子中并没有用到属性修改器。当执行`$user->age = 28`时， User Model实例里$attributes属性会变成
 
 ```
 protected $attributes = [
@@ -271,7 +272,7 @@ abstract class Model implements ...
         if ($this->fireModelEvent('saving') === false) {
             return false;
         }
-		//查询出来的Model实例的exists属性都是true
+	//查询出来的Model实例的exists属性都是true
         if ($this->exists) {
             $saved = $this->isDirty() ?
                         $this->performUpdate($query) : true;
@@ -301,7 +302,7 @@ abstract class Model implements ...
         );
     }
     
-    //数据表字段会保存在$attributes和$original两个属性里，update前要找出被更改的字段
+    //数据表字段会保存在$attributes和$original两个属性里，update前通过比对两个数组里各字段的值找出被更改的字段
     public function getDirty()
     {
         $dirty = [];
@@ -347,7 +348,7 @@ abstract class Model implements ...
     }
 }
 ```
-在save里会根据Model实例的`exists`属性来判断是执行update还是insert, 这里我们用的这个例子是update，在update时程序找出`$attributes`和`$original`两个数组属性的差集（获取Model对象时会把数据表字段会保存在`$attributes`和`$original`两个属性），如果没有更改那么update到这里就结束了，有更改那么就继续去执行`performUpdate`方法，`performUpdate`方法会执行Eloquent Builder的update方法， 而Eloquent Builder依赖的还是数据库连接的Query Builder实例去最后执行的数据库update。
+在save里会根据Model实例的`exists`属性来判断是执行update还是insert, 这里我们用的这个例子是update，在update时程序通过比对`$attributes`和`$original`两个array属性里各字段的字段值找被更改的字段（获取Model对象时会把数据表字段会保存在`$attributes`和`$original`两个属性），如果没有被更改的字段那么update到这里就结束了，有更改那么就继续去执行`performUpdate`方法，`performUpdate`方法会执行Eloquent Builder的update方法， 而Eloquent Builder依赖的还是数据库连接的Query Builder实例去最后执行的数据库update。
 
 ### Model写入
 
@@ -358,13 +359,13 @@ abstract class Model implements ...
         if ($this->fireModelEvent('creating') === false) {
             return false;
         }
-		//设置created_at和updated_at属性
+	//设置created_at和updated_at属性
         if ($this->usesTimestamps()) {
             $this->updateTimestamps();
         }
         
         $attributes = $this->attributes;
-		//如果表的主键自增insert数据并把新记录的id设置到属性里
+	//如果表的主键自增insert数据并把新记录的id设置到属性里
         if ($this->getIncrementing()) {
             $this->insertAndSetId($query, $attributes);
         }
@@ -381,7 +382,7 @@ abstract class Model implements ...
         $this->exists = true;
 
         $this->wasRecentlyCreated = true;
-		//触发created事件
+	//触发created事件
         $this->fireModelEvent('created', false);
 
         return true;
@@ -392,9 +393,9 @@ abstract class Model implements ...
 
 ### Model删除
 
-Eloquent Model的delete操作也是一样, 通过Eloquent Builder去执行数据库连接的QueryBuilder里的delete方法删除数据库记录:
+Eloquent Model的delete操作也是一样, 通过Eloquent Builder去执行数据库连接的Query Builder里的delete方法删除数据库记录:
 	
-	//Eloquent Model
+    //Eloquent Model
     public function delete()
     {
         if (is_null($this->getKeyName())) {
@@ -453,7 +454,7 @@ Query Builder的实现细节我们在上一篇文章里已经说过了这里不�
 
 ### 总结
 
-本文我们详细地看了Eloquent Model是怎么执行CRUD的，就像开头说的Eloquent Model通过Eloquent Builder来完成数据库操作，而Eloquent Builder是在Query Builder的基础上做了进一步封装, Eloquent Builder会方法调用转给Query Builder里对应的方法来完成操作，所以在Query Builder里能使用的方法到Eloquent Model中同样都能使用。
+本文我们详细地看了Eloquent Model是怎么执行CRUD的，就像开头说的Eloquent Model通过Eloquent Builder来完成数据库操作，而Eloquent Builder是在Query Builder的基础上做了进一步封装, Eloquent Builder会把这些CRUD方法的调用转给Query Builder里对应的方法来完成操作，所以在Query Builder里能使用的方法到Eloquent Model中同样都能使用。
 
 除了对数据表、基本的CRUD的抽象外，模型另外的一个重要的特点是模型关联，它帮助我们优雅的解决了数据表间的关联关系。我们在之后的文章再来详细看模型关联部分的实现。
 
