@@ -40,7 +40,7 @@ public function hasMany($related, $foreignKey = null, $localKey = null)
     $instance = $this->newRelatedInstance($related);
     //关联表的外键名
     $foreignKey = $foreignKey ?: $this->getForeignKey();
-	//主体表的主键名
+    //主体表的主键名
     $localKey = $localKey ?: $this->getKeyName();
 
     return new HasMany(
@@ -83,7 +83,7 @@ abstract class HasOneOrMany extends Relation
     }
     
     //为关联关系设置约束 子模型的foreign key等于父模型的 上面设置的$localKey字段的值
-	public function addConstraints()
+    public function addConstraints()
     {
         if (static::$constraints) {
             $this->query->where($this->foreignKey, '=', $this->getParentKey());
@@ -106,7 +106,7 @@ abstract class Relation
         $this->query = $query;
         $this->parent = $parent;
         $this->related = $query->getModel();
-		//子类实现这个抽象方法
+        //子类实现这个抽象方法
         $this->addConstraints();
     }
 }
@@ -177,7 +177,7 @@ class BelongsTo extends Relation
         if (static::$constraints) {
 
             $table = $this->related->getTable();
-			//设置约束 父模型的主键值等于子模型的外键值
+            //设置约束 父模型的主键值等于子模型的外键值
             $this->query->where($table.'.'.$this->ownerKey, '=', $this->child->{$this->foreignKey});
         }
     }
@@ -290,7 +290,7 @@ class BelongsToMany extends Relation
 
         $key = $baseTable.'.'.$this->relatedKey;
 		
-		//$query->join('role_user', 'role.id', '=', 'role_user.role_id')
+        //$query->join('role_user', 'role.id', '=', 'role_user.role_id')
         $query->join($this->table, $key, '=', $this->getQualifiedRelatedPivotKeyName());
 
         return $this;
@@ -405,7 +405,7 @@ class HasManyThrough extends Relation
         $this->performJoin();
 
         if (static::$constraints) {
-        	//$this->query->where('users.country_id', '=', 1) 假设country_id是1
+            //$this->query->where('users.country_id', '=', 1) 假设country_id是1
             $this->query->where($this->getQualifiedFirstKeyName(), '=', $localValue);
         }
     }
@@ -416,7 +416,7 @@ class HasManyThrough extends Relation
 
         $farKey = $this->getQualifiedFarKeyName();
         
-		//query->join('users', 'users.id', '=', 'posts.user_id')
+        //query->join('users', 'users.id', '=', 'posts.user_id')
         $query->join($this->throughParent->getTable(), $this->getQualifiedParentKeyName(), '=', $farKey);
 
         if ($this->throughParentSoftDeletes()) {
@@ -481,13 +481,13 @@ abstract class Model implements ...
         if (method_exists(self::class, $key)) {
             return;
         }
-		//获取模型关联的值
+        //获取模型关联的值
         return $this->getRelationValue($key);
     }
     
     public function getRelationValue($key)
     {
-		//取出已经加载的关联中，避免重复获取模型关联数据
+        //取出已经加载的关联中，避免重复获取模型关联数据
         if ($this->relationLoaded($key)) {
             return $this->relations[$key];
         }
@@ -506,7 +506,7 @@ abstract class Model implements ...
             throw new LogicException(get_class($this).'::'.$method.' must return a relationship instance.');
         }
 		
-		//通过getResults方法获取数据，并缓存到$relations数组中去
+        //通过getResults方法获取数据，并缓存到$relations数组中去
         return tap($relation->getResults(), function ($results) use ($method) {
             $this->setRelation($method, $results);
         });
