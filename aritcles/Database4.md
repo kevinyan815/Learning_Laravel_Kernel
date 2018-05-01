@@ -36,7 +36,7 @@ class Post extends Model
  */
 public function hasMany($related, $foreignKey = null, $localKey = null)
 {
-	//创建一个关联表模型的实例
+    //创建一个关联表模型的实例
     $instance = $this->newRelatedInstance($related);
     //关联表的外键名
     $foreignKey = $foreignKey ?: $this->getForeignKey();
