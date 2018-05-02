@@ -672,7 +672,7 @@ class Builder
     public function get($columns = ['*'])
     {
         $builder = $this->applyScopes();
-		//获取模型时会去加载要预加载的关联模型
+        //获取模型时会去加载要预加载的关联模型
         if (count($models = $builder->getModels($columns)) > 0) {
             $models = $builder->eagerLoadRelations($models);
         }
@@ -693,7 +693,7 @@ class Builder
     
     protected function eagerLoadRelation(array $models, $name, Closure $constraints)
     {
-		//获取关联实例
+        //获取关联实例
         $relation = $this->getRelation($name);
 		
         $relation->addEagerConstraints($models);
