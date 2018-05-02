@@ -442,9 +442,8 @@ class HasManyThrough extends Relation
    
 从SQL查询我们也可以看到远层一对多跟多对多生成的语句非常类似，唯一的区别就是它的中间表对应的是一个已定义的模型。
     
-### 加载关联模型
 
-#### 动态属性加载
+### 动态属性加载关联模型
 上面我们定义了三种使用频次比较高的模型关联，下面我们再来看一下在使用它们时关联模型时如何加载出来的。我们可以像访问属性一样访问定义好的关联的模型，例如，我们刚刚的 User 和 Post 模型例子中，我们可以这样访问用户的所有文章：
 
 ```
@@ -554,7 +553,7 @@ class BelongsToMany extends Relation
 }
 ```
 
-#### 关联方法
+### 关联方法
 出了用动态属性加载关联数据外还可以在定义关联方法的基础上再给关联的子模型添加更多的where条件等的约束，比如:
 
 	$user->posts()->where('created_at', ">", "2018-01-01");
@@ -588,6 +587,217 @@ abstract class Relation
 }
 ```
 
-### 预加载模型
+### 预加载关联模型
 
-实在太多，过两天在更......
+当作为属性访问 Eloquent 关联时，关联数据是「懒加载」的。意味着在你第一次访问该属性时，才会加载关联数据。不过当查询父模型时，Eloquent 可以「预加载」关联数据。预加载避免了 N + 1 查询问题。看一下文档里给出的例子:
+
+```
+class Book extends Model
+{
+    /**
+     * 获得此书的作者。
+     */
+    public function author()
+    {
+        return $this->belongsTo('App\Author');
+    }    
+}
+
+//获取所有的书和作者信息
+$books = App\Book::all();
+foreach ($books as $book) {
+    echo $book->author->name;
+}
+```
+上面这样使用关联在访问每本书的作者时都会执行查询加载关联数据，这样显然会影响应用的性能，那么通过预加载能够把查询降低到两次:
+
+```
+$books = App\Book::with('author')->get();
+
+foreach ($books as $book) {
+    echo $book->author->name;
+}
+```
+
+我们来看一下底层时怎么实现预加载关联模型的
+
+```
+abstract class Model implements ArrayAccess, Arrayable,......
+{
+    public static function with($relations)
+    {
+        return (new static)->newQuery()->with(
+            is_string($relations) ? func_get_args() : $relations
+        );
+    }
+}
+
+//Eloquent Builder
+class Builder
+{
+    public function with($relations)
+    {
+        $eagerLoad = $this->parseWithRelations(is_string($relations) ? func_get_args() : $relations);
+
+        $this->eagerLoad = array_merge($this->eagerLoad, $eagerLoad);
+
+        return $this;
+    }
+    
+    protected function parseWithRelations(array $relations)
+    {
+        $results = [];
+
+        foreach ($relations as $name => $constraints) {
+            //如果$name是数字索引，证明没有为预加载关联模型添加约束条件，为了统一把它的约束条件设置为一个空的闭包
+            if (is_numeric($name)) {
+                $name = $constraints;
+
+                list($name, $constraints) = Str::contains($name, ':')
+                            ? $this->createSelectWithConstraint($name)
+                            : [$name, function () {
+                                //
+                            }];
+            }
+
+            //设置这种用Book::with('author.contacts')这种嵌套预加载的约束条件
+            $results = $this->addNestedWiths($name, $results);
+
+            $results[$name] = $constraints;
+        }
+
+        return $results;
+    }
+    
+    public function get($columns = ['*'])
+    {
+        $builder = $this->applyScopes();
+		//获取模型时会去加载要预加载的关联模型
+        if (count($models = $builder->getModels($columns)) > 0) {
+            $models = $builder->eagerLoadRelations($models);
+        }
+
+        return $builder->getModel()->newCollection($models);
+    }
+    
+    public function eagerLoadRelations(array $models)
+    {
+        foreach ($this->eagerLoad as $name => $constraints) {
+            if (strpos($name, '.') === false) {
+                $models = $this->eagerLoadRelation($models, $name, $constraints);
+            }
+        }
+
+        return $models;
+    }
+    
+    protected function eagerLoadRelation(array $models, $name, Closure $constraints)
+    {
+		//获取关联实例
+        $relation = $this->getRelation($name);
+		
+        $relation->addEagerConstraints($models);
+
+        $constraints($relation);
+
+        return $relation->match(
+            $relation->initRelation($models, $name),
+            $relation->getEager(), $name
+        );
+    }
+}
+```
+
+上面的代码可以看到with方法会把要预加载的关联模型放到`$eagarLoad`属性里，针对我们这个例子他的值类似下面这样:
+
+```
+$eagarLoad = [
+	'author' => function() {}
+];
+
+//如果有约束则会是
+$eagarLoad = [
+	'author' => function($query) {
+		$query->where(....)
+	}
+];
+```
+这样在通过Model 的`get`方法获取模型时会预加载的关联模型，在获取关联模型时给关系应用约束的`addEagerConstraints`方法是在具体的关联类中定义的，我们可以看下HasMany类的这个方法。
+
+***注: 下面的代码为了阅读方便我把一些在父类里定义的方法拿到了HasMany中，自己阅读时如果找不到请去父类中找一下。
+
+```
+class HasMany extends ...
+{
+    // where book_id in (...)
+    public function addEagerConstraints(array $models)
+    {
+        $this->query->whereIn(
+            $this->foreignKey, $this->getKeys($models, $this->localKey)
+        );
+    }
+}
+```
+他给关联应用了一个`where book_id in (...)`的约束，接下来通过`getEager`方法获取所有的关联模型组成的集合，再通过关联类里定义的match方法把外键值等于父模型主键值的关联模型转化成集合设置到父模型的`$relations`属性中接下来用到了这些预加载的关联模型时都是从`$relations`属性中取出来的不会再去做数据库查询
+
+```
+class HasMany extends ...
+{
+    //初始化model的relations属性
+    public function initRelation(array $models, $relation)
+    {
+        foreach ($models as $model) {
+            $model->setRelation($relation, $this->related->newCollection());
+        }
+
+        return $models;
+    }
+    
+    //预加载出关联模型
+    public function getEager()
+    {
+        return $this->get();
+    }
+    
+    public function get($columns = ['*'])
+    {
+        return $this->query->get($columns);
+    }
+    
+    //在子类HasMany
+    public function match(array $models, Collection $results, $relation)
+    {
+        return $this->matchMany($models, $results, $relation);
+    }
+    
+    protected function matchOneOrMany(array $models, Collection $results, $relation, $type)
+    {
+    	//组成[父模型ID => [子模型1, ...]]的字典
+        $dictionary = $this->buildDictionary($results);
+
+        //将子模型设置到父模型的$relations属性中去
+        foreach ($models as $model) {
+            if (isset($dictionary[$key = $model->getAttribute($this->localKey)])) {
+                $model->setRelation(
+                    $relation, $this->getRelationValue($dictionary, $key, $type)
+                );
+            }
+        }
+
+        return $models;
+    }
+}
+```
+
+预加载关联模型后没个Book Model的`$relations`属性里都有了以关联名`author`为key的数据, 类似下面
+
+```
+$relations = [
+    'author' => Collection(Author)//Author Model组成的集合
+];
+```
+
+这样再使用动态属性引用已经预加载关联模型时就会直接从这里取出数据而不用再去做数据库查询了。
+
+模型关联常用的一些功能的底层实现到这里就疏离完了，Laravel把我们平常用的join, where in 和自查询都隐藏在了底层实现中并且帮我们做好了数据匹配。还有一些我认为使用场景没那么多的多太关联、嵌套预加载那些我并没有梳理，并且底层实现都差不多，区别就是没个关联类型有自己的关联约束、匹配规则，有兴趣的读者自己去看一下吧。
+
