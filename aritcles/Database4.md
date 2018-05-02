@@ -801,3 +801,6 @@ $relations = [
 
 模型关联常用的一些功能的底层实现到这里梳理完了，Laravel把我们平常用的join, where in 和子查询都隐藏在了底层实现中并且帮我们把相互关联的数据做好了匹配。还有一些我认为使用场景没那么多的多态关联、嵌套预加载那些我并没有梳理，并且它们的底层实现都差不多，区别就是每个关联类型有自己的关联约束、匹配规则，有兴趣的读者自己去看一下吧。
 
+
+上一篇:[Database 模型CRUD](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Database3.md)
+
