@@ -459,3 +459,4 @@ Query Builder的实现细节我们在上一篇文章里已经说过了这里不�
 除了对数据表、基本的CRUD的抽象外，模型另外的一个重要的特点是模型关联，它帮助我们优雅的解决了数据表间的关联关系。我们在之后的文章再来详细看模型关联部分的实现。
 
 上一篇: [Database 查询构建器](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Database2.md)
+下一篇: [Database 模型关联](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Database4.md)
