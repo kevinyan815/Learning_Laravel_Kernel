@@ -311,4 +311,4 @@ make: 从服务容器中解析出服务对象，该方法接收你想要解析�
 
 
   [1]: https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/reflection.md
-  [3]: https://segmentfault.com/a/1190000012918283
+  [3]: https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/ServiceProvider.md
