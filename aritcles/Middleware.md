@@ -257,69 +257,91 @@ array_reduce每次调用callback返回的闭包都会作为参数$stack传递给
         \App\Http\Middleware\TrustProxies::class,
     ];
     
-当请求对象进入`dispatchToRouter`方法后，请求对象在被Router dispatch派发给路由时会进行收集路由上应用的中间件和控制器里应用的中间件。
+当请求对象进入Http Kernel的`dispatchToRouter`方法后，请求对象在被Router dispatch派发给路由时会进行收集路由上应用的中间件和控制器里应用的中间件。
 
+```
+namespace Illuminate\Foundation\Http;
+class Kernel implements KernelContract
+{
+    protected function dispatchToRouter()
+    {
+        return function ($request) {
+            $this->app->instance('request', $request);
+
+            return $this->router->dispatch($request);
+        };
+    }
+}
+
+
+namespace Illuminate\Routing;
+class Router implements RegistrarContract, BindingRegistrar
+{	
     public function dispatch(Request $request)
     {
         $this->currentRequest = $request;
 
-        $response = $this->dispatchToRoute($request);
-
-        return $this->prepareResponse($request, $response);
+        return $this->dispatchToRoute($request);
     }
-
+    
     public function dispatchToRoute(Request $request)
     {
         return $this->runRoute($request, $this->findRoute($request));
     }
-
+    
     protected function runRoute(Request $request, Route $route)
     {
         $request->setRouteResolver(function () use ($route) {
             return $route;
         });
+
         $this->events->dispatch(new Events\RouteMatched($route, $request));
+
         return $this->prepareResponse($request,
             $this->runRouteWithinStack($route, $request)
         );
     }
-
+    
     protected function runRouteWithinStack(Route $route, Request $request)
     {
         $shouldSkipMiddleware = $this->container->bound('middleware.disable') &&
-                                $this->container->make('middleware.disable') === true;
-		//收集路由和控制器里应用的中间件
+                            $this->container->make('middleware.disable') === true;
+	    //收集路由和控制器里应用的中间件
         $middleware = $shouldSkipMiddleware ? [] : $this->gatherRouteMiddleware($route);
 
         return (new Pipeline($this->container))
-                        ->send($request)
-                        ->through($middleware)
-                        ->then(function ($request) use ($route) {
-                            return $this->prepareResponse(
-                                $request, $route->run()
-                            );
-                        });
+                    ->send($request)
+                    ->through($middleware)
+                    ->then(function ($request) use ($route) {
+                        return $this->prepareResponse(
+                            $request, $route->run()
+                        );
+                    });
+    
     }
-     
-    namespace Illuminate\Routing;
-    class Route 
+}
+
+namespace Illuminate\Routing;
+class Route
+{
+    public function run()
     {
-        public function run()
-        {
-            $this->container = $this->container ?: new Container;
-            try {
-                if ($this->isControllerAction()) {
-                    return $this->runController();
-                }
-                return $this->runCallable();
-            } catch (HttpResponseException $e) {
-                return $e->getResponse();
+        $this->container = $this->container ?: new Container;
+        try {
+            if ($this->isControllerAction()) {
+                return $this->runController();
             }
+            return $this->runCallable();
+        } catch (HttpResponseException $e) {
+            return $e->getResponse();
         }
-
     }
 
-收集完路由和控制器里应用的中间件后，依然是利用Pipeline对象来传送请求对象通过收集上来的这些中间件然后到达最终的目的地，在这里会执行目的路由的run方法，run方法里面会判断路由对应的是一个控制器方法还是闭包然后进行相应地调用，最后把执行结果包装成Response对象。Response对象会依次通过上面应用的所有中间件的后置操作，最终离开应用被发送给客户端。
+}
+```
+
+
+收集完路由和控制器里应用的中间件后，依然是利用Pipeline对象来传送请求对象通过收集上来的这些中间件然后到达最终的目的地，在那里会执行目的路由的run方法，run方法里面会判断路由对应的是一个控制器方法还是闭包然后进行相应地调用，最后把执行结果包装成Response对象。Response对象会依次通过上面应用的所有中间件的后置操作，最终离开应用被发送给客户端。
 
 限于篇幅和为了文章的可读性，收集路由和控制器中间件然后执行路由对应的处理方法的过程我就不在这里详述了，感兴趣的同学可以自己去看Router的源码，本文的目的还是主要为了梳理laravel是如何设计中间件的以及如何执行它们的，希望能对感兴趣的朋友有帮助。
 
