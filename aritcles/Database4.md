@@ -453,7 +453,7 @@ foreach ($user->posts as $post) {
     //
 }
 ```
-还记得我们上一篇文章里将获取模型属性时提到过的吗，如果模型的`$attributes`属性里没有这个字段，那么会尝试获取模型关联的值:
+还记得我们上一篇文章里讲获取模型的属性时提到过的吗？ “如果模型的`$attributes`属性里没有这个字段，那么会尝试获取模型关联的值”:
 
 ```
 abstract class Model implements ...
