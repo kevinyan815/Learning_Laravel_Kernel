@@ -290,4 +290,4 @@ trait RouteDependencyResolverTrait
 
 上一篇: [中间件](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Middleware.md)
 
-下一篇: [Database 基础介绍](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Request.md)
+下一篇: [Request](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Request.md)
