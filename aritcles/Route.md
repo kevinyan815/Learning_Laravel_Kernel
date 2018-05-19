@@ -390,6 +390,7 @@ class RouteCollection implements Countable, IteratorAggregate
         $route = $this->matchAgainstRoutes($routes, $request);
 
         if (! is_null($route)) {
+            //找到匹配的路由后，将URI里的路径参数绑定赋值给路由(如果有的话)
             return $route->bind($request);
         }
 
