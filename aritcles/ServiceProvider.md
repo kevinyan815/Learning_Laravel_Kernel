@@ -52,7 +52,7 @@ $response = $kernel->handle(
 ```
 public function handle($request)
 {
-	......
+    ......
     $response = $this->sendRequestThroughRouter($request);
     ......
             
@@ -79,8 +79,8 @@ protected function sendRequestThroughRouter($request)
 public function bootstrap()
 {
     if (! $this->app->hasBeenBootstrapped()) {
-	    /**依次执行$bootstrappers中每一个bootstrapper的bootstrap()函数
-         $bootstrappers = [
+	/**依次执行$bootstrappers中每一个bootstrapper的bootstrap()函数
+        $bootstrappers = [
              'Illuminate\Foundation\Bootstrap\DetectEnvironment',
              'Illuminate\Foundation\Bootstrap\LoadConfiguration',
              'Illuminate\Foundation\Bootstrap\ConfigureLogging',
@@ -90,18 +90,18 @@ public function bootstrap()
              'Illuminate\Foundation\Bootstrap\BootProviders',
             ];*/
             $this->app->bootstrapWith($this->bootstrappers());
-        }
     }
+}
 ```    
 上面bootstrap中会分别执行每一个bootstrapper的bootstrap方法来引导启动应用程序的各个部分
 
-        1. DetectEnvironment  检查环境
-        2. LoadConfiguration  加载应用配置
-        3. ConfigureLogging   配置日至
-        4. HandleException    注册异常处理的Handler
-        5. RegisterFacades    注册Facades 
-        6. RegisterProviders  注册Providers 
-        7. BootProviders      启动Providers
+    1. DetectEnvironment  检查环境
+    2. LoadConfiguration  加载应用配置
+    3. ConfigureLogging   配置日至
+    4. HandleException    注册异常处理的Handler
+    5. RegisterFacades    注册Facades 
+    6. RegisterProviders  注册Providers 
+    7. BootProviders      启动Providers
         
     
  启动应用程序的最后两部就是注册服务提供这和启动提供者，如果对前面几个阶段具体时怎么实现的可以参考[这篇文章](https://segmentfault.com/a/1190000006946685#articleHeader5)。在这里我们主要关注服务提供器的注册和启动。
@@ -137,7 +137,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
 
     class ProviderRepository
     {
-	      public function load(array $providers)
+        public function load(array $providers)
         {
             $manifest = $this->loadManifest();
             if ($this->shouldRecompile($manifest, $providers)) {
@@ -152,7 +152,8 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
             $this->app->addDeferredServices($manifest['deferred']);
         }
     }
-loadManifest()会加载服务提供器缓存文件services.php，如果框架是第一次启动时没有这个文件的，或者是缓存文件中的providers数组项与config/app.php里的providers数组项不一致都会编译生成services.php。
+    
+`loadManifest()`会加载服务提供器缓存文件`services.php`，如果框架是第一次启动时没有这个文件的，或者是缓存文件中的providers数组项与`config/app.php`里的providers数组项不一致都会编译生成`services.php`。
  
     //判断是否需要编译生成services文件
     public function shouldRecompile($manifest, $providers)
@@ -241,7 +242,7 @@ loadManifest()会加载服务提供器缓存文件services.php，如果框架是
 
     class Application extends Container implements ApplicationContract, HttpKernelInterface
     {
-	      public function register($provider, $options = [], $force = false)
+        public function register($provider, $options = [], $force = false)
         {
             if (($registered = $this->getProvider($provider)) && ! $force) {
                 return $registered;
@@ -264,28 +265,28 @@ loadManifest()会加载服务提供器缓存文件services.php，如果框架是
             $name = is_string($provider) ? $provider : get_class($provider);
             return Arr::first($this->serviceProviders, function ($value) use ($name) {
     	        return $value instanceof $name;
-        	});
+            });
     	}
     
-   		public function resolveProvider($provider)
+        public function resolveProvider($provider)
     	{
-        	return new $provider($this);
-    	}
+            eturn new $provider($this);
+        }
     
-	    protected function markAsRegistered($provider)
+        protected function markAsRegistered($provider)
     	{
-    		//这个属性在稍后booting服务时会用到
-        	$this->serviceProviders[] = $provider;
-	        $this->loadedProviders[get_class($provider)] = true;
-   	    }
+            //这个属性在稍后booting服务时会用到
+            $this->serviceProviders[] = $provider;
+            $this->loadedProviders[get_class($provider)] = true;
+        }
     
         protected function bootProvider(ServiceProvider $provider)
-    	{
-        	if (method_exists($provider, 'boot')) {
-            	return $this->call([$provider, 'boot']);
-        	}
-    	}
-	}
+        {
+            if (method_exists($provider, 'boot')) {
+                return $this->call([$provider, 'boot']);
+            }
+        }
+    }
 	
 可以看出，服务提供器的注册过程：
 
@@ -299,10 +300,10 @@ loadManifest()会加载服务提供器缓存文件services.php，如果框架是
 ### 服务解析时注册延迟服务提供器
 延迟服务提供器首先需要添加到 Application 中
 
-	public function addDeferredServices(array $services)
-	{
-    	$this->deferredServices = array_merge($this->deferredServices, $services);
-	}
+    public function addDeferredServices(array $services)
+    {
+        $this->deferredServices = array_merge($this->deferredServices, $services);
+    }
 	
 我们之前说过，延迟服务提供器的激活注册有两种方法：事件与服务解析。
 
@@ -315,7 +316,7 @@ class BroadcastServiceProvider extends ServiceProvider
 {
     protected $defer = true;
 	
-  	public function provides()
+    public function provides()
     {
         return [
             BroadcastManager::class,
@@ -335,22 +336,22 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     public function make($abstract)
     {
         $abstract = $this->getAlias($abstract);
-	      if (isset($this->deferredServices[$abstract])) {
-     	      $this->loadDeferredProvider($abstract);
-    	  }
-    	  return parent::make($abstract);
-	  }
+        if (isset($this->deferredServices[$abstract])) {
+            $this->loadDeferredProvider($abstract);
+        }
+        return parent::make($abstract);
+    }
 
     public function loadDeferredProvider($service)
-  	{
-      	if (! isset($this->deferredServices[$service])) {
-          	return;
-    	  }
+    {
+        if (! isset($this->deferredServices[$service])) {
+            return;
+        }
       	$provider = $this->deferredServices[$service];
-      	if (! isset($this->loadedProviders[$provider])) {
-          	$this->registerDeferredProvider($provider, $service);
-	      }
-	  }
+        if (! isset($this->loadedProviders[$provider])) {
+            $this->registerDeferredProvider($provider, $service);
+        }
+    }
 }
 ```
 
