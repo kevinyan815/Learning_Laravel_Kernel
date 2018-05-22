@@ -32,13 +32,13 @@ Facades是我们在Laravel应用开发中使用频率很高的一个组件，叫
     	if (! $this->app->hasBeenBootstrapped()) {
        	 /**依次执行$bootstrappers中每一个bootstrapper的bootstrap()函数
         	 $bootstrappers = [
-          	     'Illuminate\Foundation\Bootstrap\DetectEnvironment',
-                 'Illuminate\Foundation\Bootstrap\LoadConfiguration',
-             	 'Illuminate\Foundation\Bootstrap\ConfigureLogging',
-                 'Illuminate\Foundation\Bootstrap\HandleExceptions',
-                 'Illuminate\Foundation\Bootstrap\RegisterFacades',
-                 'Illuminate\Foundation\Bootstrap\RegisterProviders',
-                 'Illuminate\Foundation\Bootstrap\BootProviders',
+                     'Illuminate\Foundation\Bootstrap\DetectEnvironment',
+                     'Illuminate\Foundation\Bootstrap\LoadConfiguration',
+                     'Illuminate\Foundation\Bootstrap\ConfigureLogging',
+                     'Illuminate\Foundation\Bootstrap\HandleExceptions',
+                     'Illuminate\Foundation\Bootstrap\RegisterFacades',
+                     'Illuminate\Foundation\Bootstrap\RegisterProviders',
+                     'Illuminate\Foundation\Bootstrap\BootProviders',
                 ];*/
                 $this->app->bootstrapWith($this->bootstrappers());
         }
