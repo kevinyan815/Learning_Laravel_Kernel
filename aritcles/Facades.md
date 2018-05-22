@@ -75,9 +75,9 @@ class RegisterFacades
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
-		......
+        ......
         'Route' => Illuminate\Support\Facades\Route::class,
-		......
+        ......
     ]
     
 看一下AliasLoader里是如何注册这些别名的
@@ -120,7 +120,7 @@ class RegisterFacades
         }
     }
     
-在load方法里`$aliases`配置里的Facade类创建了对应的别名，比如当我们使用别名类`Route`时PHP会通过AliasLoader的load方法为把`Illuminate\Support\Facades\Route::class`类创建一个别名类`Route`，所以我们在程序里使用别`Route`其实使用的就是``Illuminate\Support\Facades\Route`类。
+在load方法里把`$aliases`配置里的Facade类创建了对应的别名，比如当我们使用别名类`Route`时PHP会通过AliasLoader的load方法为`Illuminate\Support\Facades\Route`类创建一个别名类`Route`，所以我们在程序里使用别`Route`其实使用的就是`Illuminate\Support\Facades\Route`类。
 
 ### 解析Facade代理的服务
 
