@@ -191,7 +191,7 @@ abstract class Model implements ...
         if (method_exists(self::class, $key)) {
             return;
         }
-		//获取模型关联的值
+        //获取模型关联的值
         return $this->getRelationValue($key);
     }
     
@@ -359,13 +359,13 @@ abstract class Model implements ...
         if ($this->fireModelEvent('creating') === false) {
             return false;
         }
-	//设置created_at和updated_at属性
+        //设置created_at和updated_at属性
         if ($this->usesTimestamps()) {
             $this->updateTimestamps();
         }
         
         $attributes = $this->attributes;
-	//如果表的主键自增insert数据并把新记录的id设置到属性里
+        //如果表的主键自增insert数据并把新记录的id设置到属性里
         if ($this->getIncrementing()) {
             $this->insertAndSetId($query, $attributes);
         }
@@ -382,7 +382,7 @@ abstract class Model implements ...
         $this->exists = true;
 
         $this->wasRecentlyCreated = true;
-	//触发created事件
+        //触发created事件
         $this->fireModelEvent('created', false);
 
         return true;
