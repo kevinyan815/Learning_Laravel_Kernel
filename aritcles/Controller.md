@@ -255,7 +255,7 @@ trait RouteDependencyResolverTrait
         );
     }
 ```
-*** 我们之前讲服务容器时，里面讲的服务解析解决是类构造方法的参数依赖，而这里resolveClassMethodDependencies里解决的是具体某个方法的参数依赖，它Laravel对method dependency injection概念的实现。***
+*** 我们之前讲服务容器时，里面讲的服务解析解决的是类构造方法的参数依赖，而这里resolveClassMethodDependencies解决的是具体某个方法的参数依赖，它是Laravel对method dependency injection概念的实现。***
 
 当路由的参数数组与服务容器构造的类对象数量之和不足以覆盖控制器方法参数个数时，就要去判断该参数是否具有默认参数，也就是会执行`resolveMethodDependencies`方法`foreach`块里的`else if`分支将参数的默认参数插入到方法的参数列表`$parameters`中去。
 
