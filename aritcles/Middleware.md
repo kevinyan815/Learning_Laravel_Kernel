@@ -345,6 +345,6 @@ class Route
 
 限于篇幅和为了文章的可读性，收集路由和控制器中间件然后执行路由对应的处理方法的过程我就不在这里详述了，感兴趣的同学可以自己去看Router的源码，本文的目的还是主要为了梳理laravel是如何设计中间件的以及如何执行它们的，希望能对感兴趣的朋友有帮助。
 
-上一篇: [路由](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Route.md)
+上一篇: [装饰模式](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/DecoratorPattern.md)
 
 下一篇: [控制器](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Controller.md)
