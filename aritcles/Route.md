@@ -580,4 +580,4 @@ class Route
 
 上一篇: [Facades](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Facades.md)
 
-下一篇: [中间件](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Middleware.md)
+下一篇: [装饰模式](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/DecoratorPattern.md)
