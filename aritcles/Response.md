@@ -283,3 +283,8 @@ class Response
 `send`的逻辑就非常好理解了，把之前设置好的那些headers设置到HTTP响应的首部字段里，Content会echo后被设置到HTTP响应的主体实体中。最后PHP会把完整的HTTP响应发送给客户端。
 
 send响应后Http Kernel会执行`terminate`方法调用terminate中间件里的`terminate`方法，最后执行应用的`termiate`方法来结束整个应用生命周期(从接收请求开始到返回响应结束)。
+
+
+上一篇: [Request](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Request.md)
+
+下一篇: [Database 基础介绍](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Database1.md)
