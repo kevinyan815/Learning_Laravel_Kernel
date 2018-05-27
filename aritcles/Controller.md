@@ -11,7 +11,7 @@ protected $middleware = [
     \App\Http\Middleware\TrustProxies::class,
 ];
 ```
-然后Http Kernel会通过`dispatchToRoute`将请求对象移交给路由对象进行处理，路由对象会收集路由上绑定的中间件然后还是像上面Http Kernel里一样用一个Pipeline管道对象将请求传送通过这些路由上绑定的这些中间键，到达目的地后会执行路由绑定的控制器方法然后把执行结果封装成响应对象，响应对象一次通过后置中间件最后返回给客户端。
+然后Http Kernel会通过`dispatchToRoute`将请求对象移交给路由对象进行处理，路由对象会收集路由上绑定的中间件然后还是像上面Http Kernel里一样用一个Pipeline管道对象将请求传送通过这些路由上绑定的这些中间键，到达目的地后会执行路由绑定的控制器方法然后把执行结果封装成响应对象，响应对象依次通过后置中间件最后返回给客户端。
 
 下面是刚才说的这些步骤对应的核心代码：
 
