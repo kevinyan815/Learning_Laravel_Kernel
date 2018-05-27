@@ -349,6 +349,6 @@ Connection就是DatabaseManager代理的数据库连接对象了， 所以最开
 我们需要先理解了这几个组件的作用，在这些基础之上再去顺着看查询构建器的代码。
 
 
-上一篇: [Request](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Request.md)
+上一篇: [Response](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Resposne.md)
 
 下一篇: [Database 查询构建器](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Database2.md)
