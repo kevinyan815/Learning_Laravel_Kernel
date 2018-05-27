@@ -268,4 +268,4 @@ public function fullUrlWithQuery(array $query)
 
 上一篇: [控制器](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Controller.md)
 
-下一篇: [Database 基础介绍](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Database1.md)
+下一篇: [Response](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Response.md)
