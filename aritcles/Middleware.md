@@ -24,7 +24,7 @@ class MerchantController extends Controller
 
 上面概述了下中间件在laravel中的角色，以及什么类型的代码应该从控制器挪到中间件里，至于如何定义和使用自己的laravel 中间件请参考[官方文档](https://d.laravel-china.org/docs/5.5/middleware)。
 
-下面我们主要来看一下Laravel中是怎么实现中间件的，中间件的设计应用了一种叫做装饰器的设计模式，如果你还不知道什么是装饰器模式可以查阅设计模式相关的书，也可以简单参考下[这篇文章](https://www.jianshu.com/p/5ba56d62e903)。
+下面我们主要来看一下Laravel中是怎么实现中间件的，中间件的设计应用了一种叫做装饰器的设计模式，如果你还不知道什么是装饰器模式可以查阅设计模式相关的书，也可以翻看我之前的文章[装饰模式(DecoratorPattern)](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/DecoratorPattern.md)。
 
 Laravel实例化Application后，会从服务容器里解析出Http Kernel对象，通过类的名字也能看出来Http Kernel就是Laravel里负责HTTP请求和响应的核心。
 
