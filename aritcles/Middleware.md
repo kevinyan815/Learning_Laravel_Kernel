@@ -155,7 +155,7 @@ $kernel->terminate($request, $response);
 carry
 携带上次迭代里的值； 如果本次迭代是第一次，那么这个值是 initial。item 携带了本次迭代的值。
 
-getInitialSlice方法，他的返回值是作为传递给callbakc函数的$carray参数的初始值，这个值现在是一个闭包，我把getInitialSlice和Http Kernel的dispatchToRouter这两个方法合并一下，现在$firstSlice的值为：
+getInitialSlice方法，他的返回值是作为传递给callbakc函数的$carry参数的初始值，这个值现在是一个闭包，我把getInitialSlice和Http Kernel的dispatchToRouter这两个方法合并一下，现在$firstSlice的值为：
 
 ```
 $destination = function ($request) {
@@ -209,7 +209,7 @@ $firstSlice = function ($passable) use ($destination) {
         };
     }
 
-**注：在Laravel5.5版本里 getSlice这个方法的名称换成了carray, 两者在逻辑上没有区别，所以依然可以参照着5.5版本里中间件的代码来看本文。**
+**注：在Laravel5.5版本里 getSlice这个方法的名称换成了carry, 两者在逻辑上没有区别，所以依然可以参照着5.5版本里中间件的代码来看本文。**
 
 getSlice会返回一个闭包函数, $stack在第一次调用getSlice时它的值是$firstSlice, 之后的调用中就它的值就是这里返回的值个闭包了：
 
