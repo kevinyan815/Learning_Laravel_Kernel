@@ -21,7 +21,7 @@
 
 ### 模式结构和说明
 
-![装饰器模式UML](http://7j1zeu.com1.z0.glb.clouddn.com/装饰器模式UML.png)
+![装饰器模式UML](https://user-gold-cdn.xitu.io/2018/6/3/163c449dbb766f7d)
 
 - 聚合关系用一条带空心菱形箭头的直线表示，上图表示Component聚合到Decorator上，或者说Decorator由Component组成。
 - 继承关系用一条带空心箭头的直接表示
