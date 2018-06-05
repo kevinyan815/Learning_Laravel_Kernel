@@ -804,3 +804,5 @@ $relations = [
 
 上一篇: [Database 模型CRUD](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Database3.md)
 
+下一篇: [观察者模式](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Observer.md)
+
