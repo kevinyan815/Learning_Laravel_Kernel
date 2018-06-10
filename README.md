@@ -33,4 +33,5 @@ Laravel核心代码学习
 - [Database 模型CRUD](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Database3.md)
 - [Database 模型关联](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Database4.md)
 - [观察者模式](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Observer.md)
+- [事件系统](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Event.md)
 
