@@ -103,6 +103,25 @@ public function bootstrap()
     6. RegisterProviders  注册Providers 
     7. BootProviders      启动Providers
         
+```
+namespace Illuminate\Foundation;
+
+class Application extends Container implements ...
+{
+    public function bootstrapWith(array $bootstrappers)
+    {
+        $this->hasBeenBootstrapped = true;
+
+        foreach ($bootstrappers as $bootstrapper) {
+            $this['events']->fire('bootstrapping: '.$bootstrapper, [$this]);
+
+            $this->make($bootstrapper)->bootstrap($this);
+
+            $this['events']->fire('bootstrapped: '.$bootstrapper, [$this]);
+        }
+    }
+}
+```
     
  启动应用程序的最后两部就是注册服务提供这和启动提供者，如果对前面几个阶段具体时怎么实现的可以参考[这篇文章](https://segmentfault.com/a/1190000006946685#articleHeader5)。在这里我们主要关注服务提供器的注册和启动。
  
