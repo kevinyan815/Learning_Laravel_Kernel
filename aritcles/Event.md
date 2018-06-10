@@ -192,7 +192,7 @@ class Dispatcher implements DispatcherContract
 
 ### 触发事件
 
-可以用事件名或者事件类来触发事件，触发事件时用的是`Event::fire(new OrdershipmentNotification)`， 同样它也来自`events`服务
+可以用事件名或者事件类的对象来触发事件，触发事件时用的是`Event::fire(new OrdershipmentNotification)`， 同样它也来自`events`服务
 
 ```
 public function fire($event, $payload = [], $halt = false)
