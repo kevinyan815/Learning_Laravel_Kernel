@@ -288,12 +288,12 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     	}
     
         public function resolveProvider($provider)
-    	{
+        {
             eturn new $provider($this);
         }
     
         protected function markAsRegistered($provider)
-    	{
+        {
             //这个属性在稍后booting服务时会用到
             $this->serviceProviders[] = $provider;
             $this->loadedProviders[get_class($provider)] = true;
@@ -437,7 +437,7 @@ class BootProviders
 }
 class Application extends Container implements ApplicationContract, HttpKernelInterface
 {
-	public function boot()
+    public function boot()
     {
         if ($this->booted) {
             return;
