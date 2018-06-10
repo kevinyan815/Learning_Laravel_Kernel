@@ -161,3 +161,4 @@ $worker = new Client();
 
 上一篇: [Database 模型关联](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Database4.md)
 
+下一篇: [事件系统](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Event.md)
