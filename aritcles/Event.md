@@ -271,4 +271,4 @@ Laravel的事件系统原理还是跟之前讲的观察者模式一样，不过�
 
 上一篇: [观察者模式](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Observer.md)
 
-下一篇: [Auth系统 基础介绍](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Auth1.md)
+下一篇: [用户认证系统(基础介绍)](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Auth1.md)
