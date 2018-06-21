@@ -416,3 +416,5 @@ interface UserProvider
 | User Provider | 用户提供器，定义了如何从持久化的存储数据中检索用户，Guard认证用户时会通过提供器取用户的数据，所有的提供器都是\Illuminate\Contracts\Auth\UserProvider接口的实现，提供了从持久化存储中取用户数据的具体实现细节。 |
 
 下一章节我们会看看Laravel自带的用户认证功能的实现细节。
+
+上一篇: [事件系统](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Event.md)
