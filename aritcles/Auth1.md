@@ -418,3 +418,5 @@ interface UserProvider
 下一章节我们会看看Laravel自带的用户认证功能的实现细节。
 
 上一篇: [事件系统](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Event.md)
+
+下一篇: [用户认证系统(实现细节)](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Auth2.md)
