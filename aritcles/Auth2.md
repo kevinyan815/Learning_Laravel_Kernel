@@ -409,5 +409,5 @@ class BcryptHasher implements HasherContract
 
 
 
-
+上一篇: [Auth认证系统基础介绍](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Auth1.md)
 
