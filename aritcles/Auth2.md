@@ -10,7 +10,7 @@ AuthManager装载看守器和用户提供器用到的方法比较多，用文字
 
 ```
 namespace Illuminate\Auth;
-class AuthManager extends ...
+class AuthManager implements FactoryContract
 {
     /**
      * 尝试从$guards属性中获取指定的Guard
