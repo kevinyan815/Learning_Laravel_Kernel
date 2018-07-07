@@ -13,7 +13,7 @@ namespace Illuminate\Auth;
 class AuthManager implements FactoryContract
 {
     /**
-     * 尝试从$guards属性中获取指定的Guard
+     * 尝试从config/auth.php 的guards中获取指定name对应的Guard
      *
      * @param  string  $name
      * @return \Illuminate\Contracts\Auth\Guard|\Illuminate\Contracts\Auth\StatefulGuard
@@ -64,17 +64,6 @@ class AuthManager implements FactoryContract
      * @param  string  $name
      * @return array
      */
-    'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
-
-        'api' => [
-            'driver' => 'token',
-            'provider' => 'users',
-        ],
-    ],
     protected function getConfig($name)
     {
         //'guards' => [
