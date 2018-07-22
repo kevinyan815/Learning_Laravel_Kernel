@@ -39,3 +39,7 @@ Laravel核心代码学习
 - [用户认证系统(实现细节)](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Auth2.md)
 - [扩展用户认证系统](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Auth3.md)
 
+
+## 其他推荐
+
+- [Laravel最佳实践](https://github.com/kevinyan815/laravel_best_practices_cn) 
