@@ -127,6 +127,7 @@ class RegisterFacades
 把Facades注册到框架后我们在应用程序里就能使用其中的Facade了，比如注册路由时我们经常用`Route::get('/uri', 'Controller@action);`，那么`Route`是怎么代理到路由服务的呢，这就涉及到在Facade里服务的隐式解析了， 我们看一下Route类的源码：
 
 ```
+namespace Illuminate\Support\Facades;
 class Route extends Facade
 {
     /**
@@ -142,6 +143,11 @@ class Route extends Facade
 ```
 只有简单的一个方法，并没有`get`, `post`, `delete`等那些路由方法, 父类里也没有，不过我们知道调用类不存在的静态方法时会触发PHP的`__callStatic`静态方法
 
+```
+namespace Illuminate\Support\Facades;
+
+abstract class Facade
+{
     public static function __callStatic($method, $args)
     {
         $instance = static::getFacadeRoot();
@@ -174,6 +180,9 @@ class Route extends Facade
 
         return static::$resolvedInstance[$name] = static::$app[$name];
     }
+}
+```
+通过上面的分析我们可以看到Facade类的父类`Illuminate\Support\Facades\Facade`是Laravel提供的一个抽象外观类从而让我们能够方便的根据需要增加新的子系统的外观类，并让外观类能够正确代理到其对应的子系统(或者叫服务)。
 
 通过在子类Route Facade里设置的accessor(字符串router)， 从服务容器中解析出对应的服务，router服务是在应用程序初始化时的registerBaseServiceProviders阶段（具体可以看Application的构造方法）被`\Illuminate\Routing\RoutingServiceProvider`注册到服务容器里的:
 
@@ -205,7 +214,7 @@ class RoutingServiceProvider extends ServiceProvider
     ......
 }
 ```
-router服务对应的类就是`\Illuminate\Routing\Router`, 所以Route Facade实际上代理的就是这个类，Route::get实际上调用的是`\Illuminate\Routing\Router`对象的get方法
+router服务对应的类就是`\Illuminate\Routing\Router`, 所以Route Facade实际上代理的就是这个类，Route::get实际上调用的是`\Illuminate\Routing\Router`对象的get方法。
 
     /**
      * Register a new GET route with the router.
@@ -218,6 +227,7 @@ router服务对应的类就是`\Illuminate\Routing\Router`, 所以Route Facade�
     {
         return $this->addRoute(['GET', 'HEAD'], $uri, $action);
     }
+
     
 补充两点:
 
