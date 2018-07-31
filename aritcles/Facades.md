@@ -239,6 +239,6 @@ router服务对应的类就是`\Illuminate\Routing\Router`, 所以Route Facade�
 
 通过梳理Facade的注册和使用流程我们可以看到Facade和服务提供器（ServiceProvider）是紧密配合的，所以如果以后自己写Laravel自定义服务时除了通过组件的ServiceProvider将服务注册进服务容器，还可以在组件中提供一个Facade让应用程序能够方便的访问你写的自定义服务。
 
-上一篇: [服务提供器](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/ServiceProvider.md)
+上一篇: [外观模式](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/FacadePattern.md)
 
 下一篇: [路由](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Route.md)
