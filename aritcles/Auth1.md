@@ -171,7 +171,7 @@ Auth系统的核心是由 Laravel 的认证组件的「看守器」和「提供�
 
 ### Guard
 
-看守器定义了该如何认证每个请求中用户。Laravel自带的认证系统默认使用自带的 `SessionGuard` ，`SessionGuard`除了实现`\Illuminate\Contracts\Auth`契约里的方法还实现`Illuminate\Contracts\Auth\StatefulGuard` 和`Illuminate\Contracts\Auth\SupportsBasicAuth`契约里的方法，这些Guard Contracts里定义的方法都是Laravel Auth系统默认认证方式依赖的基础方法。
+看守器定义了该如何认证每个请求中的用户。Laravel自带的认证系统默认使用自带的 `SessionGuard` ，`SessionGuard`除了实现`\Illuminate\Contracts\Auth`契约里的方法还实现`Illuminate\Contracts\Auth\StatefulGuard` 和`Illuminate\Contracts\Auth\SupportsBasicAuth`契约里的方法，这些Guard Contracts里定义的方法都是Laravel Auth系统默认认证方式依赖的基础方法。
 
 我们先来看一下这一些基础方法都意欲完成什么操作，等到分析Laravel是如何通过SessionGuard认证用户时在去关系这些方法的具体实现。
 
