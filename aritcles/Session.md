@@ -322,12 +322,12 @@ class SessionManager extends Manager
 开发者使用`Session`门面或者`$request->session()`访问Session数据都是通过`session`服务即`SessionManager`对象转发给对应的驱动器方法的，在`Illuminate\Session\Store`的源码中我们也能够看到Laravel里用到的session方法都定义在这里。
 
 ```
-Session::get($key)
-Session::has($key)
-Session::put($key, $value)
-Session::pull($key)
-Session::flash($key, $value)
-Session::forget($key)
+Session::get($key);
+Session::has($key);
+Session::put($key, $value);
+Session::pull($key);
+Session::flash($key, $value);
+Session::forget($key);
 ```
 
 上面这些session方法都能在`Illuminate\Session\Store`类里找到具体的方法实现
