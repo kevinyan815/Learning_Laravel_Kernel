@@ -1,6 +1,6 @@
 # Session 模块源码解析
 
-由于HTTP最初是一个匿名、无状态的请求／响应协议，服务器处理来自客户端的请求然后向客户端回送一条响应。现代Web应用程序为了给用户提供个性化的服务往往需要在请求中识别出用户或者在用户的多条请求之间共享数据。Session 提供了一种在多个请求之间存储、共享有关用户的信息的方法。Laravel 通过同一个可读性强的 API 处理各种自带的 Session 后台驱动程序。
+由于HTTP最初是一个匿名、无状态的请求／响应协议，服务器处理来自客户端的请求然后向客户端回送一条响应。现代Web应用程序为了给用户提供个性化的服务往往需要在请求中识别出用户或者在用户的多条请求之间共享数据。Session 提供了一种在多个请求之间存储、共享有关用户的信息的方法。`Laravel` 通过同一个可读性强的 API 处理各种自带的 Session 后台驱动程序。
 
 Session支持的驱动:
 
@@ -12,7 +12,7 @@ Session支持的驱动:
 
 
 
-这篇文章我们来详细的看一下Laravel中Session服务的实现原理，Session服务有哪些部分组成以及每部分的角色、它是何时被注册到服务容器的、请求是在何时启用session的以及如何为session扩展驱动。
+这篇文章我们来详细的看一下`Laravel`中`Session`服务的实现原理，`Session`服务有哪些部分组成以及每部分的角色、它是何时被注册到服务容器的、请求是在何时启用session的以及如何为session扩展驱动。
 
 ### 注册Session服务
 
@@ -93,7 +93,7 @@ class SessionServiceProvider extends ServiceProvider
 
 ### 创建Session驱动器
 
-上面已经说了`SessionManager`是用来创建Session驱动器的，它里面定义了各种个样的驱动器创建器(创建驱动器实例的方法) 通过它的源码来看一下session驱动器是证明被创建出来的：
+上面已经说了`SessionManager`是用来创建session驱动器的，它里面定义了各种个样的驱动器创建器(创建驱动器实例的方法) 通过它的源码来看一下session驱动器是证明被创建出来的：
 
 ```
 <?php
@@ -315,11 +315,11 @@ class SessionManager extends Manager
 
 
 
-通过`SessionManager`的源码可以看到驱动器对外提供了统一的访问接口，而不同类型的驱动器之所以能访问不同的存储介质是驱动器是通过`SessionHandler`来访问存储介质里的数据的，而不同的`SessionHandler`统一都实现了PHP内建的`SessionHandlerInterface`接口，所以驱动器能够通过统一的接口方法访问到不同的session存储介质里的数据。
+通过`SessionManager`的源码可以看到驱动器对外提供了统一的访问接口，而不同类型的驱动器之所以能访问不同的存储介质是驱动器是通过`SessionHandler`来访问存储介质里的数据的，而不同的`SessionHandler`统一都实现了`PHP`内建的`SessionHandlerInterface`接口，所以驱动器能够通过统一的接口方法访问到不同的session存储介质里的数据。
 
 ### 驱动器访问Session 数据
 
-开发者使用`Session`门面或者`$request->session()`访问Session数据都是通过`session`服务即`SessionManager`对象转发给对应的驱动器方法的，在`Illuminate\Session\Store`的源码中我们也能够看到Laravel里用到的session方法都定义在这里。
+开发者使用`Session`门面或者`$request->session()`访问Session数据都是通过`session`服务即`SessionManager`对象转发给对应的驱动器方法的，在`Illuminate\Session\Store`的源码中我们也能够看到`Laravel`里用到的session方法都定义在这里。
 
 ```
 Session::get($key);
@@ -672,7 +672,7 @@ class Store implements Session
 - Session开启后会将session数据从存储中读出暂存到attributes属性。
 - 驱动器提供给应用操作session数据的方法都是直接操作的attributes属性里的数据。
 
-同时也会产生一些疑问，在平时开发时我们并没有主动的去开启和保存session，数据是怎么加载和持久化的？通过session在用户的请求间共享数据是需要在客户端cookie存储一个session id的，这个cookie又是在哪里设置的？
+同时也会产生一些疑问，在平时开发时我们并没有主动的去开启和保存session，数据是怎么加载和持久化的？通过session在用户的请求间共享数据是需要在客户端cookie存储一个`session id`的，这个cookie又是在哪里设置的？
 
 上面的两个问题给出的解决方案是最开始说的第三个服务`StartSession`中间件
 
@@ -838,7 +838,7 @@ class StartSession
 }
 ```
 
-同样的我只保留了最关键的代码，可以看到中间件在请求进来时会先进行`session start`操作，然后在响应返回给客户端前作了设置`session id` 到cookie里， cookie的名称是由`config/session.php`里的`cookie`配置项设置的，值是本条session的ID标识符。与此同时如果session驱动器用的是`CookieSessionHandler`还会将session数据保存到cookie里cookie的名字是本条session的ID标示符(呃， 有点绕，其实就是把存在redis里的那些session数据以ID为cookie名存到cookie里了, 值是JSON格式化的session数据)。
+同样的我只保留了最关键的代码，可以看到中间件在请求进来时会先进行`session start`操作，然后在响应返回给客户端前将`session id` 设置到了cookie响应头里面， cookie的名称是由`config/session.php`里的`cookie`配置项设置的，值是本条session的ID标识符。与此同时如果session驱动器用的是`CookieSessionHandler`还会将session数据保存到cookie里cookie的名字是本条session的ID标示符(呃， 有点绕，其实就是把存在`redis`里的那些session数据以ID为cookie名存到cookie里了, 值是`JSON`格式化的session数据)。
 
 
 
@@ -894,4 +894,4 @@ class SessionServiceProvider extends ServiceProvider
 }
 ```
 
-这样在用`SessionManager`的`driver`方法创建`mongo`类型的驱动器的时候就会用`callCustomCreator`方法去创建`mongo`类型的Session驱动器了。
+这样在用`SessionManager`的`driver`方法创建`mongo`类型的驱动器的时候就会调用`callCustomCreator`方法去创建`mongo`类型的Session驱动器了。
