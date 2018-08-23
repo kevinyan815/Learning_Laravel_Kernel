@@ -61,7 +61,7 @@ class Connection implements ConnectionInterface
 }
 ```
 
-通过上面的代码段可以看到Connection类的构造方法里出了注入了Connector数据库连接器(就是参数里的`$pdo`)，还加载了两个重要的组件`Illuminate\Database\Query\Grammars\Grammar`: ***SQL语法编译器*** 和 `Illuminate\Database\Query\Processors\Processor`: ***SQL结果处理器***。 我们看一下Connection的table方法，它返回了一个QueryBuilder实例, 其在实例化的时候Connection实例、Grammer实例和Processor实例会被作为参数传人QueryBuilder的构造方法中。 
+通过上面的代码段可以看到Connection类的构造方法里除了注入了Connector数据库连接器(就是参数里的`$pdo`)，还加载了两个重要的组件`Illuminate\Database\Query\Grammars\Grammar`: ***SQL语法编译器*** 和 `Illuminate\Database\Query\Processors\Processor`: ***SQL结果处理器***。 我们看一下Connection的table方法，它返回了一个QueryBuilder实例, 其在实例化的时候Connection实例、Grammer实例和Processor实例会被作为参数传人QueryBuilder的构造方法中。 
 
 接下我们到QueryBuilder类文件`\Illuminate\Database\Query\Builder.php`里看看它里面的源码
 
