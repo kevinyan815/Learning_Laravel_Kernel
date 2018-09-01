@@ -393,7 +393,7 @@ class Request extends SymfonyRequest implements Arrayable, ArrayAccess
 }
 ```
 
-关于通过门面`Cookie::get()`读取Cookie的实现我们可以看下Cookie源码的实现，通过源码我们知道门面`Cookie`除了通过外观模式代理`Cookie`服务外自己也定义了两个方法:
+关于通过门面`Cookie::get()`读取Cookie的实现我们可以看下｀Cookie｀门面源码的实现，通过源码我们知道门面`Cookie`除了通过外观模式代理`Cookie`服务外自己也定义了两个方法:
 
 ```
 <?php
