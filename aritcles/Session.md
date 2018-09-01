@@ -897,3 +897,4 @@ class SessionServiceProvider extends ServiceProvider
 这样在用`SessionManager`的`driver`方法创建`mongo`类型的驱动器的时候就会调用`callCustomCreator`方法去创建`mongo`类型的Session驱动器了。
 
 上一篇: [扩展用户认证系统](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Auth3.md)
+下一篇: [Cookie模块源码解析](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Cookie.md)
