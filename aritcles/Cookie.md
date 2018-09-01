@@ -444,7 +444,7 @@ class Cookie extends Facade
 
 
 
-### Laravel Cookie加密
+### Cookie加密
 
 关于对Cookie的加密可以看一下`Illuminate\Cookie\Middleware\EncryptCookies`中间件的源码，它的子类`App\Http\Middleware\EncryptCookies`是Laravel`web`中间件组里的一个中间件，如果想让客户端的Javascript程序能够读Laravel设置的Cookie则需要在`App\Http\Middleware\EncryptCookies`的`$exception`里对Cookie名称进行声明。
 
