@@ -194,7 +194,7 @@ function cookie($name = null, $value = null, $minutes = 0, $path = null, $domain
 }
 ```
 
-通过`cookie`函数的@return标注我们能知道它返回的是一个`Illuminate\Cookie\CookieJar`对象或者是`\Symfony\Component\HttpFoundation\Cookie`对象。既`cookie`函数在无接受参数时返回一个`CookieJar`对象，在有Cookie参数时调用了`CookieJar`的`make`方法返回一个`\Symfony\Component\HttpFoundation\Cookie`对象。
+通过`cookie`函数的@return标注我们能知道它返回的是一个`Illuminate\Cookie\CookieJar`对象或者是`\Symfony\Component\HttpFoundation\Cookie`对象。既`cookie`函数在参数`name`为空时返回一个`CookieJar`对象，否则调用`CookieJar`的`make`方法返回一个`\Symfony\Component\HttpFoundation\Cookie`对象。
 
 
 
