@@ -789,7 +789,7 @@ class HasMany extends ...
 }
 ```
 
-预加载关联模型后没个Book Model的`$relations`属性里都有了以关联名`author`为key的数据, 类似下面
+预加载关联模型后每个Book Model的`$relations`属性里都有了以关联名`author`为key的数据, 类似下面
 
 ```
 $relations = [
