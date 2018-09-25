@@ -207,7 +207,7 @@ class AppServiceProvider extends ServiceProvider
         
         \Auth::extend('jwt', function ($app, $name, array $config) {
             // 返回一个 Illuminate\Contracts\Auth\Guard 实例...
-            return new AdminGuard(Auth::createUserProvider($config['provider']));
+	    return new \Tymon\JWTAuth\JwtGuard(Auth::createUserProvider($config['provider']));
         });
     }
     ......
