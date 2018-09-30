@@ -139,5 +139,6 @@ public function testIndexActionBindsUsersFromRepository()
 
 接口在程序设计阶段非常有用，在设计阶段与团队讨论完成功能需要制定哪些接口，然后设计出每个接口具体要实现的方法，方法的入参和返回值这些，每个人就可以按照接口的约定来开发自己的模块，遇到还没实现的接口完全可以先定义接口的假实现等到真正的实现开发完成后再进行切换，这样既降低了软件程序结构中上层对下层的耦合也能保证各部分的开发进度不会过度依赖其他部分的完成情况。
 
+上一篇: [Cookie源码解析](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Cookie.md)
 
 
