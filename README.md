@@ -41,6 +41,7 @@ Laravel核心代码学习
 - [扩展用户认证系统](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Auth3.md)
 - [Session源码解析](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Session.md)
 - [Cookie源码解析](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Cookie.md)
+- [Contracts契约](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Contracts.md)
 
 
 ## 其他推荐
