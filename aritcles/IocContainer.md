@@ -21,7 +21,7 @@ Laravel的核心是IocContainer, 文档中称其为“服务容器”，服务�
     $api = new HelpSpot\API(new HttpClient);
     $this->app->instance('HelpSpot\Api', $api);
     
-会把对象注册到服务容器的$instnces属性里
+会把对象注册到服务容器的$instances属性里
   
     ［
          'HelpSpot\Api' => $api//$api是API类的对象，这里简写了
