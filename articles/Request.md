@@ -266,6 +266,6 @@ public function fullUrlWithQuery(array $query)
 
 这篇文章主要梳理了Laravel中Request对象，主要是想让大家知道如何去查找Laravel中Request现有提供了哪些能力供我们使用避免我们在业务代码里重新造轮子去实现Request已经提供的方法。
 
-上一篇: [控制器](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Controller.md)
+上一篇: [控制器](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/articles/Controller.md)
 
-下一篇: [Response](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Response.md)
+下一篇: [Response](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/articles/Response.md)

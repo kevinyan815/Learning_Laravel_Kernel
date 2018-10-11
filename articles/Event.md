@@ -269,6 +269,6 @@ public function getListeners($eventName)
 
 Laravel的事件系统原理还是跟之前讲的观察者模式一样，不过框架的作者功力深厚，巧妙的结合应用了闭包来实现了事件系统，还有针对需要队列处理的事件，应用事件在一些比较复杂的业务场景中能利用关注点分散原则有效地解耦应用中的代码逻辑，当然也不是什么情况下都能适合应用事件来编写代码，我之前写过一篇文章[Laravel事件驱动编程](https://juejin.im/post/5b1f5db05188257d7270a194)来说明事件的应用场景，感兴趣的可以去看看。
 
-上一篇: [观察者模式](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Observer.md)
+上一篇: [观察者模式](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/articles/Observer.md)
 
-下一篇: [用户认证系统(基础介绍)](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Auth1.md)
+下一篇: [用户认证系统(基础介绍)](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/articles/Auth1.md)

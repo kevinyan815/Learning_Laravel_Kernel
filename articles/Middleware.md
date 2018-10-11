@@ -24,7 +24,7 @@ class MerchantController extends Controller
 
 上面概述了下中间件在laravel中的角色，以及什么类型的代码应该从控制器挪到中间件里，至于如何定义和使用自己的laravel 中间件请参考[官方文档](https://d.laravel-china.org/docs/5.5/middleware)。
 
-下面我们主要来看一下Laravel中是怎么实现中间件的，中间件的设计应用了一种叫做装饰器的设计模式，如果你还不知道什么是装饰器模式可以查阅设计模式相关的书，也可以翻看我之前的文章[装饰模式(DecoratorPattern)](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/DecoratorPattern.md)。
+下面我们主要来看一下Laravel中是怎么实现中间件的，中间件的设计应用了一种叫做装饰器的设计模式，如果你还不知道什么是装饰器模式可以查阅设计模式相关的书，也可以翻看我之前的文章[装饰模式(DecoratorPattern)](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/articles/DecoratorPattern.md)。
 
 Laravel实例化Application后，会从服务容器里解析出Http Kernel对象，通过类的名字也能看出来Http Kernel就是Laravel里负责HTTP请求和响应的核心。
 
@@ -345,6 +345,6 @@ class Route
 
 限于篇幅和为了文章的可读性，收集路由和控制器中间件然后执行路由对应的处理方法的过程我就不在这里详述了，感兴趣的同学可以自己去看Router的源码，本文的目的还是主要为了梳理laravel是如何设计中间件的以及如何执行它们的，希望能对感兴趣的朋友有帮助。
 
-上一篇: [装饰模式](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/DecoratorPattern.md)
+上一篇: [装饰模式](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/articles/DecoratorPattern.md)
 
-下一篇: [控制器](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Controller.md)
+下一篇: [控制器](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/articles/Controller.md)

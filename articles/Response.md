@@ -285,6 +285,6 @@ class Response
 send响应后Http Kernel会执行`terminate`方法调用terminate中间件里的`terminate`方法，最后执行应用的`termiate`方法来结束整个应用生命周期(从接收请求开始到返回响应结束)。
 
 
-上一篇: [Request](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Request.md)
+上一篇: [Request](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/articles/Request.md)
 
-下一篇: [Database 基础介绍](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Database1.md)
+下一篇: [Database 基础介绍](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/articles/Database1.md)

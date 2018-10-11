@@ -264,6 +264,6 @@ class LoginController extends Controller
 
 通过上面的例子我们讲解了如何通过自定义认证看守器和用户提供器扩展Laravel的用户认证系统，目的是让大家对Laravel的用户认证系统有一个更好的理解知道在Laravel系统默认自带的用户认证方式无法满足我们的需求时如何通过自定义这两个组件来扩展功能完成我们项目自己的认证需求。
 
-上一篇: [用户认证系统(实现细节)](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Auth2.md)
+上一篇: [用户认证系统(实现细节)](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/articles/Auth2.md)
 
-下一篇: [Session](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Session.md)
+下一篇: [Session](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/articles/Session.md)

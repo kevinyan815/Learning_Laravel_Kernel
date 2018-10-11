@@ -241,6 +241,6 @@ float(3.14)*/
 下一篇：[Laravel服务容器][3]
 
   [1]: http://php.net/manual/zh/intro.reflection.php
-  [2]: https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/IocContainer.md
-  [3]: https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/IocContainer.md
+  [2]: https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/articles/IocContainer.md
+  [3]: https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/articles/IocContainer.md
   [4]: https://github.com/kevinyan815/php_reflection_dependency_injection_demo/blob/master/reflection.php

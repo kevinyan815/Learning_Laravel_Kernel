@@ -288,6 +288,6 @@ trait RouteDependencyResolverTrait
 执行完拿到结果后，按照上面`runRouteWithinStack`里的逻辑，结果会被转换成响应对象。然后响应对象会依次经过之前应用过的所有中间件的后置操作，最后返回给客户端。
 
 
-上一篇: [中间件](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Middleware.md)
+上一篇: [中间件](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/articles/Middleware.md)
 
-下一篇: [Request](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/aritcles/Request.md)
+下一篇: [Request](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/articles/Request.md)
