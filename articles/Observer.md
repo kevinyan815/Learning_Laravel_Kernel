@@ -14,7 +14,7 @@ Laravel的Event事件系统提供了一个简单的观察者模式实现，能�
 
 ### 模式结构说明
 
-![观察者模式UML](http://7j1zeu.com1.z0.glb.clouddn.com/ObserverPatternUML.png)
+![观察者模式UML](https://user-gold-cdn.xitu.io/2018/6/6/163d27e2a360d07e?imageslim)
 
 - Subject  目标抽象类
 - ConcreteSubject 具体目标
