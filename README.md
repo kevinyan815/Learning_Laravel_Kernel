@@ -42,6 +42,7 @@ Laravel核心代码学习
 - [Session源码解析](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/articles/Session.md)
 - [Cookie源码解析](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/articles/Cookie.md)
 - [Contracts契约](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/articles/Contracts.md)
+- [加载和读取ENV配置](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/articles/ENV.md)
 
 
 ## 其他推荐
