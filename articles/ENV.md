@@ -1,4 +1,4 @@
-Laravel在启动时会加载项目中的`.env`文件。对于应用程序运行的环境来说，不同的环境有不同的配置通常是很有用的。 例如，你可能希望在本地使用测试的Mysql数据库而在上线后希望项目能够自动切换到生产Mysql数据库。本文将会详细介绍 `env` 文件的使用与源码的分析。
+Laravel在启动时会加载项目中的`.env`文件。对于应用程序运行的环境来说，不同的环境有不同的配置通常是很有用的。 例如，你可能希望在本地使用测试的Mysql数据库而在上线后希望项目能够自动切换到生产`Mysql`数据库。本文将会详细介绍 `env` 文件的使用与源码的分析。
 
 
 
@@ -16,7 +16,7 @@ Laravel在启动时会加载项目中的`.env`文件。对于应用程序运行�
 
 - 在部署项目的持续集成任务或者部署脚本里执行`cp .env.dev .env `
 
-针对前两种方法，Laravel会根据`env('APP_ENV')`加载到的变量值去加载对应的文件`.env.dev`、`.env.test`这些。 具体在后面源码里会说，第三种比较好理解就是在部署项目时将环境的配置文件覆盖到`.env`文件里这样就不需要在环境的系统和`nginx`里做额外的设置了。
+针对前两种方法，`Laravel`会根据`env('APP_ENV')`加载到的变量值去加载对应的文件`.env.dev`、`.env.test`这些。 具体在后面源码里会说，第三种比较好理解就是在部署项目时将环境的配置文件覆盖到`.env`文件里这样就不需要在环境的系统和`nginx`里做额外的设置了。
 
 ### 自定义env文件的路径与文件名
 
@@ -130,7 +130,7 @@ class LoadEnvironmentVariables
 }
 ```
 
-在他的启动方法`bootstrap`中，Laravel会检查配置是否缓存过以及判断应该应用那个`env`文件，针对上面说的根据环境加载配置文件的三种方法中的头两种，因为系统或者nginx环境变量中设置了`APP_ENV`，所以Laravel会在`checkForSpecificEnvironmentFile`方法里根据 `APP_ENV`的值设置正确的配置文件的具体路径， 比如`.env.dev`或者`.env.test`，而针对第三中情况则是默认的`.env`， 具体可以参看下面的`checkForSpecificEnvironmentFile`还有相关的Application里的两个方法的源码：
+在他的启动方法`bootstrap`中，`Laravel`会检查配置是否缓存过以及判断应该应用那个`env`文件，针对上面说的根据环境加载配置文件的三种方法中的头两种，因为系统或者nginx环境变量中设置了`APP_ENV`，所以Laravel会在`checkForSpecificEnvironmentFile`方法里根据 `APP_ENV`的值设置正确的配置文件的具体路径， 比如`.env.dev`或者`.env.test`，而针对第三中情况则是默认的`.env`， 具体可以参看下面的`checkForSpecificEnvironmentFile`还有相关的Application里的两个方法的源码：
 
 ```
 protected function checkForSpecificEnvironmentFile($app)
@@ -174,7 +174,7 @@ class Application ....
 (new Dotenv($app->environmentPath(), $app->environmentFile()))->load();
 ```
 
-`Laravel`使用的是DotENV的PHP版本`vlucas/phpdotenv`
+`Laravel`使用的是`Dotenv`的PHP版本`vlucas/phpdotenv`
 
 ```php
 class Dotenv
@@ -221,7 +221,7 @@ class Loader
 }
 ```
 
-Loader读取配置时`readLinesFromFile`函数会用`file`函数将配置从文件中一行行地读取到数组中去，然后排除以`#`开头的注释，针对内容中包含`=`的行去调用`setEnvironmentVariable`方法去把文件行中的环境变量配置到项目中去：
+`Loader`读取配置时`readLinesFromFile`函数会用`file`函数将配置从文件中一行行地读取到数组中去，然后排除以`#`开头的注释，针对内容中包含`=`的行去调用`setEnvironmentVariable`方法去把文件行中的环境变量配置到项目中去：
 
 ```
 namespace Dotenv;
@@ -268,7 +268,7 @@ class Loader
 }
 ```
 
-Dotenv实例化Loader的时候把Loader对象的`$immutable`属性设置成了`false`，Loader设置变量的时候如果通过`getEnvironmentVariable`方法读取到了变量值，那么就会跳过该环境变量的设置。所以Dotenv默认情况下不会覆盖已经存在的环境变量，这个很关键，比如说在docker的容器编排文件里，我们会给PHP应用容器设置关于Mysql容器的两个环境变量
+`Dotenv`实例化`Loader`的时候把`Loader`对象的`$immutable`属性设置成了`false`，`Loader`设置变量的时候如果通过`getEnvironmentVariable`方法读取到了变量值，那么就会跳过该环境变量的设置。所以`Dotenv`默认情况下不会覆盖已经存在的环境变量，这个很关键，比如说在`docker`的容器编排文件里，我们会给`PHP`应用容器设置关于`Mysql`容器的两个环境变量
 
 ```
     environment:
@@ -276,7 +276,7 @@ Dotenv实例化Loader的时候把Loader对象的`$immutable`属性设置成了`f
       - "DB_HOST=database"
 ```
 
-这样在容器里设置好环境变量后，即使`env`文件里的`DB_HOST`为`homestead`用`env`函数读取出来的也还是容器里之前设置的`DB_HOST`环境变量的值`database`(docker中容器链接默认使用服务名称，在编排文件中我把mysql容器的服务名称设置成了database, 所以php容器要通过database这个host来连接mysql容器)。因为用我们在持续集成中做自动化测试的时候通常都是在容器里进行测试，所以Dotenv不会覆盖已存在环境变量这个行为就相当重要这样我就可以只设置容器里环境变量的值完成测试而不用更改项目里的`env`文件，等到测试完成后直接去将项目部署到环境上就可以了。
+这样在容器里设置好环境变量后，即使`env`文件里的`DB_HOST`为`homestead`用`env`函数读取出来的也还是容器里之前设置的`DB_HOST`环境变量的值`database`(docker中容器链接默认使用服务名称，在编排文件中我把mysql容器的服务名称设置成了database, 所以php容器要通过database这个host来连接mysql容器)。因为用我们在持续集成中做自动化测试的时候通常都是在容器里进行测试，所以`Dotenv`不会覆盖已存在环境变量这个行为就相当重要这样我就可以只设置容器里环境变量的值完成测试而不用更改项目里的`env`文件，等到测试完成后直接去将项目部署到环境上就可以了。
 
 如果检查环境变量不存在那么接着Dotenv就会把环境变量通过PHP内建函数`putenv`设置到环境中去，同时也会存储到`$_ENV`和`$_SERVER`这两个全局变量中。
 
@@ -324,6 +324,6 @@ function env($key, $default = null)
 }
 ```
 
-它直接通过PHP内建函数`getenv`读取环境变量。
+它直接通过`PHP`内建函数`getenv`读取环境变量。
 
 我们看到了在加载配置和读取配置的时候，使用了`putenv`和`getenv`两个函数。`putenv`设置的环境变量只在请求期间存活，请求结束后会恢复环境之前的设置。因为如果php.ini中的`variables_order`配置项成了 `GPCS`不包含`E`的话，那么php程序中是无法通过`$_ENV`读取环境变量的，所以使用`putenv`动态地设置环境变量让开发人员不用去关注服务器上的配置。而且在服务器上给运行用户配置的环境变量会共享给用户启动的所有进程，这就不能很好的保护比如`DB_PASSWORD`、`API_KEY`这种私密的环境变量，所以这种配置用`putenv`设置能更好的保护这些配置信息，`getenv`方法能获取到系统的环境变量和`putenv`动态设置的环境变量。
