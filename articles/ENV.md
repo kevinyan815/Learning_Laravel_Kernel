@@ -44,7 +44,7 @@ $app->loadEnvironmentFrom('customer.env')
 
 
 
-### Laravel 加载ENV配置
+## Laravel 加载ENV配置
 
 `Laravel`加载`ENV`的是在框架处理请求之前，bootstrap过程中的`LoadEnvironmentVariables`阶段中完成的。
 
@@ -280,7 +280,7 @@ class Loader
 
 如果检查环境变量不存在那么接着Dotenv就会把环境变量通过PHP内建函数`putenv`设置到环境中去，同时也会存储到`$_ENV`和`$_SERVER`这两个全局变量中。
 
-### 在项目中读取env配置
+## 在项目中读取env配置
 
 在Laravel应用程序中可以使用`env()`函数去读取环境变量的值，比如获取数据库的HOST：
 
