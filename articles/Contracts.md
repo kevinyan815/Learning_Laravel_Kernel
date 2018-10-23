@@ -141,4 +141,6 @@ public function testIndexActionBindsUsersFromRepository()
 
 上一篇: [Cookie源码解析](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/articles/Cookie.md)
 
+下一篇: [ENV配置的加载和读取](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/articles/ENV.md)
+
 
