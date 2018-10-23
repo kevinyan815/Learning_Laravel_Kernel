@@ -327,3 +327,5 @@ function env($key, $default = null)
 它直接通过`PHP`内建函数`getenv`读取环境变量。
 
 我们看到了在加载配置和读取配置的时候，使用了`putenv`和`getenv`两个函数。`putenv`设置的环境变量只在请求期间存活，请求结束后会恢复环境之前的设置。因为如果php.ini中的`variables_order`配置项成了 `GPCS`不包含`E`的话，那么php程序中是无法通过`$_ENV`读取环境变量的，所以使用`putenv`动态地设置环境变量让开发人员不用去关注服务器上的配置。而且在服务器上给运行用户配置的环境变量会共享给用户启动的所有进程，这就不能很好的保护比如`DB_PASSWORD`、`API_KEY`这种私密的环境变量，所以这种配置用`putenv`设置能更好的保护这些配置信息，`getenv`方法能获取到系统的环境变量和`putenv`动态设置的环境变量。
+
+上一篇: [Contracts契约](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/articles/Contracts.md)
