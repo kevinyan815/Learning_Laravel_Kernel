@@ -364,3 +364,5 @@ Http内核的`terminate`方法会调用`teminable`中间件的`terminate`方法�
 ### 总结
 
 本节介绍的HTTP内核起到的主要是串联作用，其中设计到的初始化应用、引导应用、将HTTP请求抽象成Request对象、传递Request对象通过中间件到达处理程序生成响应以及响应发送给客户端。这些东西在之前的章节里都有讲过，并没有什么新的东西，希望通过这篇文章能让大家把之前文章里讲到的每个点串成一条线，这样对Laravel整体是怎么工作的会有更清晰的概念。
+
+上一篇: [加载和读取ENV配置](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/articles/ENV.md)
