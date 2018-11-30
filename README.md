@@ -49,3 +49,4 @@ Laravel核心代码学习
 ## 其他推荐
 
 - [Laravel最佳实践](https://github.com/kevinyan815/laravel_best_practices_cn) 
+- [Laravel Gitlab持续集成](https://github.com/kevinyan815/gitlab-ci)
