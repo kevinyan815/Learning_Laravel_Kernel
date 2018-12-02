@@ -122,7 +122,7 @@ public function testIndexActionBindsUsersFromRepository()
 {    
     // Arrange...
     $repository = Mockery::mock('OrderRepositoryInterface');
-    $repository->shouldReceive('userOrders')->once()->andReturn(['order1', 'order2]);
+    $repository->shouldReceive('userOrders')->once()->andReturn(['order1', 'order2']);
     App::instance('OrderRepositoryInterface', $repository);
     // Act...
     $response  = $this->action('GET', 'OrderController@getUserOrders');
