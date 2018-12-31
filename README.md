@@ -17,6 +17,11 @@ Laravel核心代码学习
 ## 关于框架版本
 在通过这个项目学习`Laravel`核心代码时请使用`Laravel5.5`版本，由于服务容器和中间件两篇文章成稿比较早那会还在使用5.2版本的Laravel做项目所以引用的代码也来自5.2版本，其余章节的代码均引用自`Laravel5.5`的核心，两个版本的核心代码差异很小我已经在这两篇文章中标注出差异的地方所以不影响读者使用这个项目来学习`Laravel5.5`版本的核心代码。
 
+## Contact
+- [Open an issue](https://github.com/kevinyan815/Learning_Laravel_Kernel/issues)
+- Gmail: kevinyan815@gmail.com
+- 微信公众号：***网管叨bi叨***
+
 ## 文章目录
 
 - [类的反射和依赖注入](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/articles/reflection.md)
