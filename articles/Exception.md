@@ -302,3 +302,5 @@ while($e instanceof \Exception) {
 
 
 异常处理是`PHP`非常重要但又容易让开发者忽略的功能，这篇文章简单解释了`Laravel`内部异常处理的机制以及扩展`Laravel`异常处理的方式方法。更多的篇幅着重分享了一些异常处理的编程实践，这些正是我希望每个读者都能看明白并实践下去的一些编程习惯，包括之前分享的`Interface`的应用也是一样。
+
+上一篇: [Console内核](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/articles/ConsoleKernel.md)
