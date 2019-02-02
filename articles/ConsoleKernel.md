@@ -233,7 +233,7 @@ class Application
 
 到这里通过命令行开启的程序进程到这里就结束了，跟HTTP内核一样Console内核在整个生命周期中也是负责调度，只不过Http内核最终将请求落地到了`Controller`程序中而Console内核则是将命令行请求落地到了Laravel中定义的各种命令类程序中，然后在命令类里面我们就可以写其他程序一样自由地使用Laravel中的各个组件和注册到服务容器里的服务了。
 
-上一篇: [Console内核](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/articles/HttpKernel.md)
+上一篇: [HTTP内核](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/articles/HttpKernel.md)
 
 下一篇: [异常处理](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/articles/Exception.md)
 
