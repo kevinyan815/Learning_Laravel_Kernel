@@ -51,6 +51,7 @@ Laravel核心代码学习
 - [HTTP内核](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/articles/HttpKernel.md)
 - [Console内核](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/articles/ConsoleKernel.md)
 - [异常处理](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/articles/Exception.md)
+- [结束语](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/articles/Farewell.md)
 
 
 
