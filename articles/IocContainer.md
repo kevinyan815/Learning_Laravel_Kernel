@@ -266,7 +266,7 @@ make: 从服务容器中解析出服务对象，该方法接收你想要解析�
         foreach ($parameters as $parameter) {
             $dependency = $parameter->getClass();
 
-            // 某一依赖值在$primitives中(即build方法的$parameters参数)已提供
+            // 某一依赖值在$primitives中(如：app()->make(ApiService::class, ['clientId' => 'id'])调用时$primitives里会包含ApiService类构造方法中参数$clientId的参数值)已提供
             // $parameter->name返回参数名
             if (array_key_exists($parameter->name, $primitives)) {
                 $dependencies[] = $primitives[$parameter->name];
