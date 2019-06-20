@@ -20,7 +20,6 @@ Laravel核心代码学习
 ## Contact
 - [Open an issue](https://github.com/kevinyan815/Learning_Laravel_Kernel/issues)
 - Gmail: kevinyan815@gmail.com
-- 微信公众号：***网管叨bi叨***
 
 ## 文章目录
 
