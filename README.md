@@ -61,3 +61,4 @@ Laravel核心代码学习
 - [Laravel Gitlab持续集成](https://github.com/kevinyan815/gitlab-ci)
 
 ## 捐赠
+<img src="https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/images/WechatDonation.jpeg" width="300px" height="300px"/>
