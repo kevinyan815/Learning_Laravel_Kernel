@@ -81,9 +81,9 @@ class UserController extends Controller
         $this->orders = $orderRespository;
     }
   
-    public function getUserOrders()
+    public function getUserOrders(User $user)
     {
-        $orders = $this->orders->userOrders();
+        $orders = $this->orders->userOrders($user);
         return View::make('order.index', compact('orders'));
     }
 }
