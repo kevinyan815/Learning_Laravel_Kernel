@@ -19,7 +19,7 @@ Laravel中我们常用到的`Route`、`Redis`、`Auth`这些Facade就是外观�
 - Facade 外观角色
 - SubSystem 子系统角色
 
-![UML类图](http://7j1zeu.com1.z0.glb.clouddn.com/外观模式UML.jpg)
+![UML类图](https://user-gold-cdn.xitu.io/2018/7/31/164eeca9a4b7bff7)
 
 ### 代码示例
 
