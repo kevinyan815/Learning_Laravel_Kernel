@@ -58,9 +58,8 @@ Laravel核心代码学习
 
 
 ## 其他推荐
-
+- [Go Web编程入门指南](https://github.com/kevinyan815/go_web_programming)
 - [Laravel最佳实践](https://github.com/kevinyan815/laravel_best_practices_cn) 
-- [Laravel Gitlab持续集成](https://github.com/kevinyan815/gitlab-ci)
 
 ## 捐赠
 <img src="https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/images/WechatDonation.jpeg" width="300px" height="300px"/>
