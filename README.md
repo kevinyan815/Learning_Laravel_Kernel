@@ -22,7 +22,7 @@ Laravel核心代码学习
 - Gmail: kevinyan815@gmail.com
 - 公众号: "网管叨bi叨"
 
-![](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/images/tWbHIMFsM3.png)
+![](https://github.com/kevinyan815/Learning_Laravel_Kernel/blob/master/images/WX20200119-143845%402x.png)
 
 ## 文章目录
 
