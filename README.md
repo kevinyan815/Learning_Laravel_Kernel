@@ -57,7 +57,7 @@ Laravel核心代码学习
 
 
 ## 其他推荐
-- [Go Web编程入门指南](https://github.com/kevinyan815/go_web_programming)
+- [Go Web编程入门指南](https://github.com/go-study-lab/go-http-server)
 - [Laravel最佳实践](https://github.com/kevinyan815/laravel_best_practices_cn) 
 - [我的Golang开发手记](https://github.com/kevinyan815/gocookbook)
 
