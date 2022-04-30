@@ -61,12 +61,3 @@ Laravel核心代码学习
 - [Laravel最佳实践](https://github.com/kevinyan815/laravel_best_practices_cn) 
 - [我的Golang开发手记](https://github.com/kevinyan815/gocookbook)
 
-## 招聘
-
-给自己打一条广告，如果你觉得自己能达到PHP高级工程师的水平，觉得技术上有瓶颈，想扩展Go或者Java语言的经验但是现在的公司没有机会？或者觉得面试其他语言的工程师信心不足？
-欢迎PHP工程师向我投递简历，我们现在PHP有少量系统需要维护，入职后给切换语言的过渡期，后期使用Go或者Java作为主开发语言。
-
-如果你觉得这是个机会欢迎给我投递简历，我帮你们内推。我的联系方式上面有，邮箱和公众号联系我都可以。
-
-公司坐标：北京市 | 东城区
-
