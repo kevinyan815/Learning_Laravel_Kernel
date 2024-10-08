@@ -61,3 +61,12 @@ Laravel核心代码学习
 - [Laravel最佳实践](https://github.com/kevinyan815/laravel_best_practices_cn) 
 - [我的Golang开发手记](https://github.com/kevinyan815/gocookbook)
 
+**另外最近我推出了自己的Go实战专栏课程，专栏配套一个专属的私有项目，通过tag版本追踪记录每个章节代码的变更，让大家能轻松跟上学习**。
+
+**专栏分为五大部分**：
+
+<img width="854" alt="image" src="https://github.com/user-attachments/assets/9b7b2ceb-6e3f-4c38-89a8-5fb5c5a05d98">
+
+**访问：https://xiaobot.net/p/golang 或者扫码下方海报二维码可查看课程详情**
+
+<img width="361" alt="image" src="https://github.com/user-attachments/assets/576eb2be-4cd3-43ab-9c61-ec73d900549b">
